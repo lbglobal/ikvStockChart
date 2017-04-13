@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="ma_normal">MA(5, 10, 20)</string>
+    <string name="ma_highlight">●MA5 %1$.2f ●MA10 %2$.2f ●MA20 %3$.2f</string>
+
+    <string name="macd_normal">MACD(12, 26, 9)</string>
+    <string name="macd_highlight">MACD(12, 26, 9) ●DIFF %1$.2f ●DEA %2$.2f ●MACD %3$.2f</string>
+
+    <string name="rsi_normal">RSI(6, 12, 24)</string>
+    <string name="rsi_highlight">RSI(6, 12, 24) ●RSI1 %1$.2f ●RSI2 %2$.2f ●RSI3 %3$.2f</string>
+
+    <string name="kdj_normal">KDJ(9, 3, 3)</string>
+    <string name="kdj_highlight">KDJ(9, 3, 3) ●K %1$.2f ●D %2$.2f ●J %3$.2f</string>
+
+    <string name="boll_normal">BOLL(20, 2)</string>
+    <string name="boll_highlight">BOLL(20, 2) ●MID %1$.2f ●UPPER %2$.2f ●LOWER %3$.2f</string>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tab按键, 带提示红点 -->
+    <declare-styleable name="TabButton">
+        <attr name="dotSize" format="dimension"/>
+    </declare-styleable>
+
+    <!-- 作用同系统的 fitsSystemWindows -->
+    <attr name="fitsSystemWindows" format="boolean"/>
+
+</resources>

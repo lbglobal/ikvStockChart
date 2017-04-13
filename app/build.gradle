@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.wordplat.InteractiveKLineView.example"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode APP_VERSION_CODE as int // 这里的值去 gradle.properties 文件中修改，免去每次更新版本都 sync 一遍
+        versionName APP_VERSION_NAME as String
+        vectorDrawables.useSupportLibrary = true
+
+        multiDexEnabled true
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+        }
+
+        manifestPlaceholders = [
+                SERVER_HTTP_URL_VERSION : SERVER_HTTP_URL_VERSION as String,
+        ]
+    }
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
+
+    compile 'org.xutils:xutils:3.3.36'
+    // 设置状态栏颜色
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    // multidex
+    compile 'com.android.support:multidex:1.0.1'
+    // 下拉刷新, 支持ScrollView、RecyclerView
+    compile 'com.chanven.lib:cptr:1.1.0'
+
+    compile project(':ikvStockChart')
+
+    compile 'com.wordplat:RecyclerViewEasyDivider:1.0.3'
+
+    compile 'io.reactivex:rxjava:1.1.9'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.3@aar'
+
+    compile 'com.alibaba:fastjson:1.1.46.android'
+}

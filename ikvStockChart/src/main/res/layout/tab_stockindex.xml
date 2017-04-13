@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup
+    android:id="@+id/But_Group"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="@dimen/stock_index_tab_height"
+    android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/MACD_But"
+        style="@style/StockIndexTabStyle"
+        android:layout_height="match_parent"
+        android:text="MACD"/>
+
+    <RadioButton
+        android:id="@+id/RSI_But"
+        style="@style/StockIndexTabStyle"
+        android:layout_height="match_parent"
+        android:text="RSI"/>
+
+    <RadioButton
+        android:id="@+id/KDJ_But"
+        style="@style/StockIndexTabStyle"
+        android:layout_height="match_parent"
+        android:text="KDJ"/>
+
+    <RadioButton
+        android:id="@+id/BOLL_But"
+        style="@style/StockIndexTabStyle"
+        android:layout_height="match_parent"
+        android:text="BOLL"/>
+
+</RadioGroup>

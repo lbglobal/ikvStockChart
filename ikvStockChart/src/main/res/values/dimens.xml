@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- 整个指标 view 的高度 -->
+    <dimen name="stock_index_view_height">100dp</dimen>
+
+    <!-- 指标 tab 高度 -->
+    <dimen name="stock_index_tab_height">20dp</dimen>
+
+    <!-- 高亮 MarkerView 高度 -->
+    <dimen name="stock_marker_view_height">15dp</dimen>
+
+</resources>

@@ -1,0 +1,97 @@
+<resources>
+
+    <declare-styleable name="InteractiveKLineView">
+
+        <!-- 与轴、网格有关的属性 -->
+
+        <attr name="xLabelSize" format="dimension" />
+        <attr name="xLabelColor" format="color" />
+        <attr name="xLabelViewHeight" format="dimension" />
+
+        <attr name="yLabelSize" format="dimension" />
+        <attr name="yLabelColor" format="color" />
+
+        <attr name="axisSize" format="dimension" />
+        <attr name="axisColor" format="color" />
+        <attr name="gridSize" format="dimension" />
+        <attr name="gridColor" format="color" />
+
+        <!-- 与高亮、MarkerView 有关的属性 -->
+
+        <attr name="highlightSize" format="dimension" />
+        <attr name="highlightColor" format="color" />
+
+        <attr name="markerBorderSize" format="dimension" />
+        <attr name="markerBorderColor" format="color" />
+        <attr name="markerTextSize" format="dimension" />
+        <attr name="markerTextColor" format="color" />
+
+        <!-- 与分时图有关的属性 -->
+
+        <attr name="timeLineSize" format="dimension" />
+        <attr name="timeLineColor" format="color" />
+
+        <!-- 与蜡烛图有关的属性 -->
+
+        <attr name="candleBorderSize" format="dimension" />
+        <attr name="candleExtremumLabelSize" format="dimension" />
+        <attr name="candleExtremumLableColor" format="color" />
+        <attr name="shadowSize" format="dimension" />
+        <attr name="increasingColor" format="color" />
+        <attr name="decreasingColor" format="color" />
+        <attr name="neutralColor" format="color" />
+        <attr name="portraitDefaultVisibleCount" format="integer" />
+        <attr name="zoomInTimes" format="integer" />
+        <attr name="zoomOutTimes" format="integer" />
+
+        <!-- 与股票指标有关的属性 -->
+
+        <attr name="maLineSize" format="dimension" />
+        <attr name="ma5Color" format="color" />
+        <attr name="ma10Color" format="color" />
+        <attr name="ma20Color" format="color" />
+
+        <attr name="bollLineSize" format="dimension" />
+        <attr name="bollMidLineColor" format="color" />
+        <attr name="bollUpperLineColor" format="color" />
+        <attr name="bollLowerLineColor" format="color" />
+
+        <attr name="kdjLineSize" format="dimension" />
+        <attr name="kdjKLineColor" format="color" />
+        <attr name="kdjDLineColor" format="color" />
+        <attr name="kdjJLineColor" format="color" />
+
+        <attr name="macdLineSize" format="dimension" />
+        <attr name="macdHighlightTextColor" format="color" />
+        <attr name="deaLineColor" format="color" />
+        <attr name="diffLineColor" format="color" />
+
+        <attr name="rsiLineSize" format="dimension" />
+        <attr name="rsi1LineColor" format="color" />
+        <attr name="rsi2LineColor" format="color" />
+        <attr name="rsi3LineColor" format="color" />
+
+        <attr name="maTextSize" format="dimension" />
+        <attr name="maTextColor" format="color" />
+        <attr name="bollTextSize" format="dimension" />
+        <attr name="bollTextColor" format="color" />
+        <attr name="kdjTextSize" format="dimension" />
+        <attr name="kdjTextColor" format="color" />
+        <attr name="macdTextSize" format="dimension" />
+        <attr name="macdTextColor" format="color" />
+        <attr name="rsiTextSize" format="dimension" />
+        <attr name="rsiTextColor" format="color" />
+
+        <!-- 其它 -->
+
+        <attr name="loadingTextSize" format="dimension" />
+        <attr name="loadingTextColor" format="color" />
+        <attr name="loadingText" format="string" />
+
+        <attr name="errorTextSize" format="dimension" />
+        <attr name="errorTextColor" format="color" />
+        <attr name="errorText" format="string" />
+
+    </declare-styleable>
+
+</resources>

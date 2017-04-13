@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wordplat.quickstart" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".app.App"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+
+        <!-- SingleTask 启动模式，重新启动 MainActivity 时会使 MainActivity 之上的 Activity 全部出栈，
+          对于应用内跳转到 MainActivity 的某一个 fragment 非常有作用 -->
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.Enable_Left_And_Right_Refresh_Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".activity.Disable_Left_And_Right_Refresh_Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".activity.MACD_RSI_KDJ_Show_Together_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.Multi_Color_Dynamic_Change_Configuration_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.With_Fragment_And_TabLayout_Switcher_Example_Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".activity.With_Pull_To_Refresh_Example_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.With_RecyclerView_Example_Activity"
+            android:screenOrientation="portrait" />
+
+        <!-- ################################# 其它设定 ######################################### -->
+
+        <!-- 与服务器接口通信的版本号，勿在这里手工修改此值，在编译时本值会自动由gradle设置上 -->
+        <meta-entryData
+            android:name="server_http_url_version"
+            android:value="${SERVER_HTTP_URL_VERSION}" />
+
+    </application>
+
+</manifest>

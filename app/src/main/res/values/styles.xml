@@ -1,0 +1,33 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="fitsSystemWindows">false</item>
+    </style>
+
+    <!-- Tab风格 -->
+    <style name="HomeTabStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@drawable/text_tab</item>
+        <item name="android:background">@drawable/btn_tab</item>
+    </style>
+
+    <!-- 仿 iOS 底部弹出动画 -->
+    <style name="BottomDialogAnim" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+    <style name="KLineTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15dp</item>
+    </style>
+
+</resources>

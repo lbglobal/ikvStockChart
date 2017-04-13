@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1e82d2</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- 标题背景 -->
+    <color name="colorPrimaryDark">#1e82d2</color>
+    <!-- 所有点击波纹颜色 -->
+    <color name="ripple">#D8D8D8</color>
+
+    <color name="divider">#dddddd</color>
+
+</resources>

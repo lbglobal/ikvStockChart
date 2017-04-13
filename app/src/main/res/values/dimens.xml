@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- 标题高度 -->
+    <dimen name="title_height">44dp</dimen>
+
+    <!-- 标题字体 -->
+    <dimen name="title_text_all">17dp</dimen>
+
+    <!-- 标题按键 -->
+    <dimen name="title_text_btn">15dp</dimen>
+
+    <!-- 常用编辑框用到的字体大小 -->
+    <dimen name="edit_input_size">15dp</dimen>
+
+</resources>
