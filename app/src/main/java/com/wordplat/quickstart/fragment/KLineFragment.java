@@ -16,12 +16,12 @@ import com.wordplat.quickstart.bean.YahooKLineBean;
 import com.wordplat.quickstart.bean.response.YahooResponse;
 import com.wordplat.quickstart.mvp.YahooStockListener;
 import com.wordplat.quickstart.mvp.YahooStockPresenter;
-import com.wordplat.stockview.InteractiveKLineLayout;
-import com.wordplat.stockview.KLineHandler;
-import com.wordplat.stockview.entry.Entry;
-import com.wordplat.stockview.entry.EntrySet;
-import com.wordplat.stockview.entry.SizeColor;
-import com.wordplat.stockview.render.KLineRender;
+import com.wordplat.ikvstockchart.InteractiveKLineLayout;
+import com.wordplat.ikvstockchart.KLineHandler;
+import com.wordplat.ikvstockchart.entry.Entry;
+import com.wordplat.ikvstockchart.entry.EntrySet;
+import com.wordplat.ikvstockchart.entry.SizeColor;
+import com.wordplat.ikvstockchart.render.KLineRender;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;

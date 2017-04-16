@@ -12,6 +12,7 @@ import com.wordplat.quickstart.activity.Disable_Left_And_Right_Refresh_Activity;
 import com.wordplat.quickstart.activity.Enable_Left_And_Right_Refresh_Activity;
 import com.wordplat.quickstart.activity.MACD_RSI_KDJ_Show_Together_Activity;
 import com.wordplat.quickstart.activity.Multi_Color_Dynamic_Change_Configuration_Activity;
+import com.wordplat.quickstart.activity.Simple_TimeLine_Example_Activity;
 import com.wordplat.quickstart.activity.With_Fragment_And_TabLayout_Switcher_Example_Activity;
 import com.wordplat.quickstart.activity.With_Pull_To_Refresh_Example_Activity;
 import com.wordplat.quickstart.activity.With_RecyclerView_Example_Activity;
@@ -35,6 +36,7 @@ public class TextAdapter extends RecyclerView.Adapter<TextViewHolder> {
         textList.add("带有下拉刷新的需求中使用");
 //        textList.add("动态改变颜色、尺寸配置"); // 还没有准备好
 //        textList.add("在 RecyclerView 列表中使用"); // 还没有准备好
+        textList.add("简单分时图");
     }
 
     private Activity mActivity;
@@ -85,6 +87,10 @@ public class TextAdapter extends RecyclerView.Adapter<TextViewHolder> {
 //                    case 6:
 //                        intent = With_RecyclerView_Example_Activity.createIntent(mActivity);
 //                        break;
+
+                    case 5:
+                        intent = Simple_TimeLine_Example_Activity.createIntent(mActivity);
+                        break;
 
                     default:
                         break;

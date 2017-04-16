@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import com.chanven.lib.cptr.PtrFrameLayout;
 import com.chanven.lib.cptr.loadmore.DefaultLoadMoreViewFooter;
 import com.chanven.lib.cptr.loadmore.ILoadMoreViewFactory;
-import com.wordplat.stockview.compat.GestureMoveActionCompat;
+import com.wordplat.ikvstockchart.compat.GestureMoveActionCompat;
 
 /**
  * Created by liutao on 16/9/6.

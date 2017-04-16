@@ -33,6 +33,9 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 repositories {
@@ -59,7 +62,7 @@ dependencies {
 
     compile project(':ikvStockChart')
 
-    compile 'com.wordplat:RecyclerViewEasyDivider:1.0.3'
+    compile 'com.wordplat:RecyclerViewEasyDivider:1.0.4'
 
     compile 'io.reactivex:rxjava:1.1.9'
     compile 'io.reactivex:rxandroid:1.2.1'

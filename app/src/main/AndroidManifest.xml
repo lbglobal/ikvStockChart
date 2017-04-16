@@ -56,6 +56,10 @@
             android:name=".activity.With_RecyclerView_Example_Activity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.Simple_TimeLine_Example_Activity"
+            android:screenOrientation="portrait" />
+
         <!-- ################################# 其它设定 ######################################### -->
 
         <!-- 与服务器接口通信的版本号，勿在这里手工修改此值，在编译时本值会自动由gradle设置上 -->

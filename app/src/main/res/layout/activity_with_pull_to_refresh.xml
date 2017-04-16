@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.wordplat.stockview.InteractiveKLineLayout
+    <com.wordplat.ikvstockchart.InteractiveKLineLayout
         android:id="@+id/kLineLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -52,6 +52,6 @@
             android:visibility="gone"
             app:srcCompat="@drawable/vector_drawable_loading2_anim"/>
 
-    </com.wordplat.stockview.InteractiveKLineLayout>
+    </com.wordplat.ikvstockchart.InteractiveKLineLayout>
 
 </com.wordplat.quickstart.widget.pulllistview.PullListLayout>
