@@ -18,8 +18,19 @@ android {
         }
 
         manifestPlaceholders = [
-                SERVER_HTTP_URL_VERSION : SERVER_HTTP_URL_VERSION as String,
+                SERVER_HTTP_URL_VERSION: SERVER_HTTP_URL_VERSION as String,
         ]
+    }
+    applicationVariants.all { variant ->
+        if (variant.buildType.name.contains('release')) {
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    def fileName = "ikvStockChart-" + defaultConfig.versionName + "-release.apk"
+                    output.outputFile = new File(outputFile.parent, fileName)
+                }
+            }
+        }
     }
     aaptOptions {
         additionalParameters "--no-version-vectors"

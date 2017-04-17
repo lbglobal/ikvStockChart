@@ -136,6 +136,7 @@ public class InteractiveKLineView extends View {
     }
 
     public void setRender(AbstractRender render) {
+        render.setSizeColor(this.render.getSizeColor());
         this.render = render;
     }
 
