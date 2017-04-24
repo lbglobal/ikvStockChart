@@ -1,6 +1,6 @@
 ## Features
 
-当前最新版本：0.1.1 (2017.04.17)
+当前最新版本：0.1.2 (2017.04.24)
 
 支持在 XML 布局文件和代码中设置各个线条颜色、大小配置
 
@@ -23,7 +23,7 @@
 ## Usage
 
 ```groovy
-compile 'com.wordplat:ikvStockChart:0.1.1'
+compile 'com.wordplat:ikvStockChart:0.1.2'
 ```
 
 ```xml

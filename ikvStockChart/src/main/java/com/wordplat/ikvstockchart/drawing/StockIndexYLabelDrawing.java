@@ -42,6 +42,8 @@ public class StockIndexYLabelDrawing implements IDrawing {
 
     private final RectF indexRect = new RectF();
 
+    private int yLabelAlign = 1; // Y 轴标签对齐方向 1: left, 2: right
+
     @Override
     public void onInit(RectF contentRect, AbstractRender render) {
         final SizeColor sizeColor = render.getSizeColor();
@@ -52,6 +54,10 @@ public class StockIndexYLabelDrawing implements IDrawing {
         }
         yLabelPaint.setColor(sizeColor.getYLabelColor());
         yLabelPaint.getFontMetrics(fontMetrics);
+        yLabelAlign = sizeColor.getYLabelAlign();
+        if (yLabelAlign == 2) {
+            yLabelPaint.setTextAlign(Paint.Align.RIGHT);
+        }
 
         indexRect.set(contentRect);
     }
@@ -63,15 +69,17 @@ public class StockIndexYLabelDrawing implements IDrawing {
 
     @Override
     public void onComputeOver(Canvas canvas, int minIndex, int maxIndex, float minY, float maxY) {
+        float labelX = yLabelAlign == 1 ? indexRect.left + 5 : indexRect.right - 5;
+
         canvas.drawText(
                 decimalFormatter.format(maxY),
-                indexRect.left + 5,
+                labelX,
                 indexRect.top - fontMetrics.top,
                 yLabelPaint);
 
         canvas.drawText(
                 decimalFormatter.format(minY),
-                indexRect.left + 5,
+                labelX,
                 indexRect.bottom - fontMetrics.bottom,
                 yLabelPaint);
     }

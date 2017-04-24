@@ -51,6 +51,8 @@ public class KLineGridAxisDrawing implements IDrawing {
     private final float[] pointCache = new float[2];
     private float lineHeight;
 
+    private int yLabelAlign = 1; // Y 轴标签对齐方向 1: left, 2: right
+
     @Override
     public void onInit(RectF contentRect, AbstractRender render) {
         this.render = (KLineRender) render;
@@ -69,6 +71,10 @@ public class KLineGridAxisDrawing implements IDrawing {
         }
         yLabelPaint.setTextSize(sizeColor.getYLabelSize());
         yLabelPaint.setColor(sizeColor.getYLabelColor());
+        yLabelAlign = sizeColor.getYLabelAlign();
+        if (yLabelAlign == 2) {
+            yLabelPaint.setTextAlign(Paint.Align.RIGHT);
+        }
 
         if (axisPaint == null) {
             axisPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -158,7 +164,9 @@ public class KLineGridAxisDrawing implements IDrawing {
                 pointCache[0] = lineTop + fontMetrics.bottom;
             }
 
-            canvas.drawText(value, kLineRect.left + 5, pointCache[0], yLabelPaint);
+            float labelX = yLabelAlign == 1 ? kLineRect.left + 5 : kLineRect.right - 5;
+
+            canvas.drawText(value, labelX, pointCache[0], yLabelPaint);
         }
     }
 }

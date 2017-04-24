@@ -10,6 +10,10 @@
 
         <attr name="yLabelSize" format="dimension" />
         <attr name="yLabelColor" format="color" />
+        <attr name="yLabelAlign">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+        </attr>
 
         <attr name="axisSize" format="dimension" />
         <attr name="axisColor" format="color" />

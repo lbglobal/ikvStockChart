@@ -77,6 +77,8 @@ public class ViewUtils {
             sizeColor.setYLabelColor(a.getColor(R.styleable.InteractiveKLineView_yLabelColor,
                     sizeColor.getYLabelColor()));
 
+            sizeColor.setYLabelAlign(a.getInteger(R.styleable.InteractiveKLineView_yLabelAlign, 1));
+
             sizeColor.setAxisSize(a.getDimension(R.styleable.InteractiveKLineView_axisSize,
                     sizeColor.getAxisSize()));
 

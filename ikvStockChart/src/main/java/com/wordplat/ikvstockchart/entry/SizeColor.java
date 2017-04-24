@@ -36,6 +36,7 @@ public class SizeColor {
     private float xLabelViewHeight = 50; // X 轴 Label 区域的高度
     private float yLabelSize = 21; // Y 轴标签字符大小
     private int yLabelColor = 0xff282b34; // Y 轴标签字符颜色
+    private int yLabelAlign = 1; // Y 轴标签对齐方向 1: left, 2: right
 
     private float axisSize = 2f; // 轴线条大小
     private int axisColor = 0xffdddddd; // 轴线条颜色
@@ -80,6 +81,14 @@ public class SizeColor {
 
     public void setYLabelColor(int yLabelColor) {
         this.yLabelColor = yLabelColor;
+    }
+
+    public int getYLabelAlign() {
+        return yLabelAlign;
+    }
+
+    public void setYLabelAlign(int yLabelAlign) {
+        this.yLabelAlign = yLabelAlign;
     }
 
     public float getAxisSize() {
