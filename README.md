@@ -22,7 +22,7 @@
 
 添加 设置 X 轴、Y 轴 MarkerView 对齐方向
 
-![](http://ww1.sinaimg.cn/large/006tNbRwgy1feysqbpgg2g30dc0nkdxh.gif)
+![](http://ww1.sinaimg.cn/large/006tNbRwgy1feysmzj8atg30dc0nkdy5.gif)
 
 查看全部日志：[https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md](https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md)
 
