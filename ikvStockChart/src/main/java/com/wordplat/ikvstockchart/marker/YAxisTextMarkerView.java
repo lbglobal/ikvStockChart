@@ -23,6 +23,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Region;
 
+import com.wordplat.ikvstockchart.align.YMarkerAlign;
 import com.wordplat.ikvstockchart.entry.SizeColor;
 import com.wordplat.ikvstockchart.render.AbstractRender;
 
@@ -50,6 +51,7 @@ public class YAxisTextMarkerView implements IMarkerView {
     private final int height;
     private final RectF markerInsets = new RectF(0, 0, 0, 0);
     private float inset = 0;
+    private YMarkerAlign yMarkerAlign;
 
     public YAxisTextMarkerView(int height) {
         this.height = height;
@@ -78,6 +80,8 @@ public class YAxisTextMarkerView implements IMarkerView {
         markerBorderPaint.setStrokeWidth(sizeColor.getMarkerBorderSize());
         markerBorderPaint.setColor(sizeColor.getMarkerBorderColor());
         inset = markerBorderPaint.getStrokeWidth() / 2;
+
+        yMarkerAlign = sizeColor.getYMarkerAlign();
     }
 
     @Override
@@ -99,7 +103,19 @@ public class YAxisTextMarkerView implements IMarkerView {
                 highlightPointY = contentRect.bottom - height;
             }
 
-            markerInsets.left= contentRect.left + inset;
+            if (yMarkerAlign == YMarkerAlign.LEFT) {
+                markerInsets.left = contentRect.left + inset;
+
+            } else if (yMarkerAlign == YMarkerAlign.RIGHT) {
+                markerInsets.left = contentRect.right - width + inset;
+
+            } else if (highlightPointX < contentRect.left + contentRect.width() / 3) {
+                markerInsets.left = contentRect.right - width + inset;
+
+            } else {
+                markerInsets.left = contentRect.left + inset;
+            }
+
             markerInsets.top = highlightPointY + inset;
             markerInsets.right = markerInsets.left + width - inset * 2;
             markerInsets.bottom = markerInsets.top + height - inset * 2;

@@ -1,6 +1,6 @@
 ## Features
 
-当前最新版本：0.1.2 (2017.04.24)
+当前最新版本：0.1.3
 
 支持在 XML 布局文件和代码中设置各个线条颜色、大小配置
 
@@ -18,12 +18,18 @@
 
 ## Change log
 
-[https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md](https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md)
+> 2017.04.25
+
+添加 设置 X 轴、Y 轴 MarkerView 对齐方向
+
+![](http://ww1.sinaimg.cn/large/006tNbRwgy1feysqbpgg2g30dc0nkdxh.gif)
+
+查看全部日志：[https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md](https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md)
 
 ## Usage
 
 ```groovy
-compile 'com.wordplat:ikvStockChart:0.1.2'
+compile 'com.wordplat:ikvStockChart:0.1.3'
 ```
 
 ```xml
@@ -72,7 +78,7 @@ compile 'com.wordplat:ikvStockChart:0.1.2'
         });
 ```
 
-ikvStockChart 支持 63 个属性配置，设置各个线条颜色大小参考[https://github.com/wordplat/ikvStockChart/blob/master/PROPERTY.md](https://github.com/wordplat/ikvStockChart/blob/master/PROPERTY.md)
+ikvStockChart 支持 66 个属性配置，设置各个线条颜色大小参考 [https://github.com/wordplat/ikvStockChart/blob/master/PROPERTY.md](https://github.com/wordplat/ikvStockChart/blob/master/PROPERTY.md)
 
 ```java
         SizeColor sizeColor = kLineLayout.getKLineView().getRender().getSizeColor();

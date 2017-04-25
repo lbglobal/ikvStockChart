@@ -17,14 +17,16 @@
 
 ### 与高亮、MarkerView 有关的属性和方法
 
-| XML                   | Java Code            | Comment         | Since |
-| --------------------- | -------------------- | --------------- | ----- |
-| app:highlightSize     | setHighlightSize     | 高亮线条大小          | 0.1.0 |
-| app:highlightColor    | setHighlightColor    | 高亮线条颜色          | 0.1.0 |
-| app:markerBorderSize  | setMarkerBorderSize  | MarkerView 边框大小 | 0.1.0 |
-| app:markerBorderColor | setMarkerBorderColor | MarkerView 边框颜色 | 0.1.0 |
-| app:markerTextSize    | setMarkerTextSize    | MarkerView 字符大小 | 0.1.0 |
-| app:markerTextColor   | setMarkerTextColor   | MarkerView 字符颜色 | 0.1.0 |
+| XML                   | Java Code            | Comment             | Since |
+| --------------------- | -------------------- | ------------------- | ----- |
+| app:highlightSize     | setHighlightSize     | 高亮线条大小              | 0.1.0 |
+| app:highlightColor    | setHighlightColor    | 高亮线条颜色              | 0.1.0 |
+| app:markerBorderSize  | setMarkerBorderSize  | MarkerView 边框大小     | 0.1.0 |
+| app:markerBorderColor | setMarkerBorderColor | MarkerView 边框颜色     | 0.1.0 |
+| app:markerTextSize    | setMarkerTextSize    | MarkerView 字符大小     | 0.1.0 |
+| app:markerTextColor   | setMarkerTextColor   | MarkerView 字符颜色     | 0.1.0 |
+| app:xMarkerAlign      | setXMarkerAlign      | X 轴 MarkerView 对齐方向 | 0.1.3 |
+| app:yMarkerAlign      | setYMarkerAlign      | Y 轴 MarkerView 对齐方向 | 0.1.3 |
 
 
 

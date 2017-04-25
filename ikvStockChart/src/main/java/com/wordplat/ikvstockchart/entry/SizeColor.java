@@ -18,6 +18,10 @@
 
 package com.wordplat.ikvstockchart.entry;
 
+import com.wordplat.ikvstockchart.align.XMarkerAlign;
+import com.wordplat.ikvstockchart.align.YLabelAlign;
+import com.wordplat.ikvstockchart.align.YMarkerAlign;
+
 /**
  * <p>线条大小、颜色配置类</p>
  * <p>Date: 2017/3/8</p>
@@ -36,7 +40,7 @@ public class SizeColor {
     private float xLabelViewHeight = 50; // X 轴 Label 区域的高度
     private float yLabelSize = 21; // Y 轴标签字符大小
     private int yLabelColor = 0xff282b34; // Y 轴标签字符颜色
-    private int yLabelAlign = 1; // Y 轴标签对齐方向 1: left, 2: right
+    private YLabelAlign yLabelAlign = YLabelAlign.LEFT; // Y 轴标签对齐方向
 
     private float axisSize = 2f; // 轴线条大小
     private int axisColor = 0xffdddddd; // 轴线条颜色
@@ -83,11 +87,11 @@ public class SizeColor {
         this.yLabelColor = yLabelColor;
     }
 
-    public int getYLabelAlign() {
+    public YLabelAlign getYLabelAlign() {
         return yLabelAlign;
     }
 
-    public void setYLabelAlign(int yLabelAlign) {
+    public void setYLabelAlign(YLabelAlign yLabelAlign) {
         this.yLabelAlign = yLabelAlign;
     }
 
@@ -134,6 +138,8 @@ public class SizeColor {
     private int markerBorderColor = 0xff282b34; // MarkerView 边框颜色
     private float markerTextSize = 21; // MarkerView 字符大小
     private int markerTextColor = 0xff282b34; // MarkerView 字符颜色
+    private XMarkerAlign xMarkerAlign = XMarkerAlign.AUTO; // X 轴 MarkerView 对齐方向
+    private YMarkerAlign yMarkerAlign = YMarkerAlign.AUTO; // Y 轴 MarkerView 对齐方向
 
     public float getHighlightSize() {
         return highlightSize;
@@ -181,6 +187,22 @@ public class SizeColor {
 
     public void setMarkerTextColor(int markerTextColor) {
         this.markerTextColor = markerTextColor;
+    }
+
+    public XMarkerAlign getXMarkerAlign() {
+        return xMarkerAlign;
+    }
+
+    public void setXMarkerAlign(XMarkerAlign xMarkerAlign) {
+        this.xMarkerAlign = xMarkerAlign;
+    }
+
+    public YMarkerAlign getYMarkerAlign() {
+        return yMarkerAlign;
+    }
+
+    public void setYMarkerAlign(YMarkerAlign yMarkerAlign) {
+        this.yMarkerAlign = yMarkerAlign;
     }
 
     ///////////////////////////////////////////////////////////////////////////

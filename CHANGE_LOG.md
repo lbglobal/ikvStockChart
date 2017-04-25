@@ -1,3 +1,11 @@
+### 0.1.3
+
+> 2017.04.25
+
+添加 设置 X 轴、Y 轴 MarkerView 对齐方向
+
+![](http://ww1.sinaimg.cn/large/006tNbRwgy1feysqbpgg2g30dc0nkdxh.gif)
+
 ### 0.1.2
 
 > 2017.04.24

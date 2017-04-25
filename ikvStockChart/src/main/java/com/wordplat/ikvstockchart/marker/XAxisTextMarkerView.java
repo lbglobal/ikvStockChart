@@ -23,6 +23,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Region;
 
+import com.wordplat.ikvstockchart.align.XMarkerAlign;
 import com.wordplat.ikvstockchart.entry.Entry;
 import com.wordplat.ikvstockchart.entry.SizeColor;
 import com.wordplat.ikvstockchart.render.AbstractRender;
@@ -47,6 +48,7 @@ public class XAxisTextMarkerView implements IMarkerView {
     private final int height;
     private final RectF markerInsets = new RectF(0, 0, 0, 0);
     private float inset = 0;
+    private XMarkerAlign xMarkerAlign;
 
     public XAxisTextMarkerView(int height) {
         this.height = height;
@@ -75,6 +77,8 @@ public class XAxisTextMarkerView implements IMarkerView {
         markerBorderPaint.setStrokeWidth(sizeColor.getMarkerBorderSize());
         markerBorderPaint.setColor(sizeColor.getMarkerBorderColor());
         inset = markerBorderPaint.getStrokeWidth() / 2;
+
+        xMarkerAlign = sizeColor.getXMarkerAlign();
     }
 
     @Override
@@ -93,8 +97,21 @@ public class XAxisTextMarkerView implements IMarkerView {
                     highlightPointX = contentRect.right - width;
                 }
 
-                markerInsets.left= highlightPointX + inset;
-                markerInsets.top = contentRect.top + inset;
+                markerInsets.left = highlightPointX + inset;
+
+                if (xMarkerAlign == XMarkerAlign.TOP) {
+                    markerInsets.top = contentRect.top + inset;
+
+                } else if (xMarkerAlign == XMarkerAlign.BOTTOM) {
+                    markerInsets.top = contentRect.bottom - height + inset;
+
+                } else if (highlightPointY < contentRect.top + contentRect.height() / 3) {
+                    markerInsets.top = contentRect.bottom - height + inset;
+
+                } else {
+                    markerInsets.top = contentRect.top + inset;
+                }
+
                 markerInsets.right = markerInsets.left + width - inset * 2;
                 markerInsets.bottom = markerInsets.top + height - inset * 2;
 

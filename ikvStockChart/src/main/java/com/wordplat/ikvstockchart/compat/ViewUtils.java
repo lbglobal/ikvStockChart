@@ -24,6 +24,9 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.wordplat.ikvstockchart.R;
+import com.wordplat.ikvstockchart.align.XMarkerAlign;
+import com.wordplat.ikvstockchart.align.YLabelAlign;
+import com.wordplat.ikvstockchart.align.YMarkerAlign;
 import com.wordplat.ikvstockchart.entry.SizeColor;
 
 /**
@@ -77,7 +80,8 @@ public class ViewUtils {
             sizeColor.setYLabelColor(a.getColor(R.styleable.InteractiveKLineView_yLabelColor,
                     sizeColor.getYLabelColor()));
 
-            sizeColor.setYLabelAlign(a.getInteger(R.styleable.InteractiveKLineView_yLabelAlign, 1));
+            int align = a.getInteger(R.styleable.InteractiveKLineView_yLabelAlign, YLabelAlign.LEFT.ordinal());
+            sizeColor.setYLabelAlign(YLabelAlign.values()[align]);
 
             sizeColor.setAxisSize(a.getDimension(R.styleable.InteractiveKLineView_axisSize,
                     sizeColor.getAxisSize()));
@@ -109,6 +113,12 @@ public class ViewUtils {
 
             sizeColor.setMarkerTextColor(a.getColor(R.styleable.InteractiveKLineView_markerTextColor,
                     sizeColor.getMarkerTextColor()));
+
+            align = a.getInteger(R.styleable.InteractiveKLineView_xMarkerAlign, XMarkerAlign.AUTO.ordinal());
+            sizeColor.setXMarkerAlign(XMarkerAlign.values()[align]);
+
+            align = a.getInteger(R.styleable.InteractiveKLineView_yMarkerAlign, YMarkerAlign.AUTO.ordinal());
+            sizeColor.setYMarkerAlign(YMarkerAlign.values()[align]);
 
             // 与分时图有关的属性
             sizeColor.setTimeLineSize(a.getDimension(R.styleable.InteractiveKLineView_timeLineSize,

@@ -22,6 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
+import com.wordplat.ikvstockchart.align.YLabelAlign;
 import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.entry.SizeColor;
 import com.wordplat.ikvstockchart.render.AbstractRender;
@@ -51,7 +52,7 @@ public class KLineGridAxisDrawing implements IDrawing {
     private final float[] pointCache = new float[2];
     private float lineHeight;
 
-    private int yLabelAlign = 1; // Y 轴标签对齐方向 1: left, 2: right
+    private YLabelAlign yLabelAlign; // Y 轴标签对齐方向
 
     @Override
     public void onInit(RectF contentRect, AbstractRender render) {
@@ -72,7 +73,7 @@ public class KLineGridAxisDrawing implements IDrawing {
         yLabelPaint.setTextSize(sizeColor.getYLabelSize());
         yLabelPaint.setColor(sizeColor.getYLabelColor());
         yLabelAlign = sizeColor.getYLabelAlign();
-        if (yLabelAlign == 2) {
+        if (yLabelAlign == YLabelAlign.RIGHT) {
             yLabelPaint.setTextAlign(Paint.Align.RIGHT);
         }
 
@@ -164,7 +165,7 @@ public class KLineGridAxisDrawing implements IDrawing {
                 pointCache[0] = lineTop + fontMetrics.bottom;
             }
 
-            float labelX = yLabelAlign == 1 ? kLineRect.left + 5 : kLineRect.right - 5;
+            float labelX = yLabelAlign == YLabelAlign.LEFT ? kLineRect.left + 5 : kLineRect.right - 5;
 
             canvas.drawText(value, labelX, pointCache[0], yLabelPaint);
         }

@@ -22,6 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
+import com.wordplat.ikvstockchart.align.YLabelAlign;
 import com.wordplat.ikvstockchart.entry.SizeColor;
 import com.wordplat.ikvstockchart.render.AbstractRender;
 
@@ -42,7 +43,7 @@ public class StockIndexYLabelDrawing implements IDrawing {
 
     private final RectF indexRect = new RectF();
 
-    private int yLabelAlign = 1; // Y 轴标签对齐方向 1: left, 2: right
+    private YLabelAlign yLabelAlign; // Y 轴标签对齐方向
 
     @Override
     public void onInit(RectF contentRect, AbstractRender render) {
@@ -55,7 +56,7 @@ public class StockIndexYLabelDrawing implements IDrawing {
         yLabelPaint.setColor(sizeColor.getYLabelColor());
         yLabelPaint.getFontMetrics(fontMetrics);
         yLabelAlign = sizeColor.getYLabelAlign();
-        if (yLabelAlign == 2) {
+        if (yLabelAlign == YLabelAlign.RIGHT) {
             yLabelPaint.setTextAlign(Paint.Align.RIGHT);
         }
 
@@ -69,7 +70,7 @@ public class StockIndexYLabelDrawing implements IDrawing {
 
     @Override
     public void onComputeOver(Canvas canvas, int minIndex, int maxIndex, float minY, float maxY) {
-        float labelX = yLabelAlign == 1 ? indexRect.left + 5 : indexRect.right - 5;
+        float labelX = yLabelAlign == YLabelAlign.LEFT ? indexRect.left + 5 : indexRect.right - 5;
 
         canvas.drawText(
                 decimalFormatter.format(maxY),
