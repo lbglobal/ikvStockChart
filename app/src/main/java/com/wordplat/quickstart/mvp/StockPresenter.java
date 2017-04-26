@@ -1,22 +1,23 @@
 package com.wordplat.quickstart.mvp;
 
-import com.wordplat.quickstart.bean.response.YahooResponse;
+import com.wordplat.quickstart.bean.KLineBean;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 /**
- * <p>YahooStockPresenter</p>
+ * <p>StockPresenter</p>
  * <p>Date: 2017/4/11</p>
  *
  * @author afon
  */
 
-public class YahooStockPresenter extends BasePresenter<YahooStockView> {
+public class StockPresenter extends BasePresenter<StockView> {
 
     private static final int LOAD_BETWEEN_DAYS = 100; // 日 K 一次加载多少天
     private static final int LOAD_BETWEEN_WEEK = 50; // 周 K 一次加载多少周
@@ -45,25 +46,21 @@ public class YahooStockPresenter extends BasePresenter<YahooStockView> {
         calendar.setTime(currentBeginTime.getTime());
         computeNextTime(calendar, kLineType, true);
 
-        Subscription subscription = YahooApiRequest.getKLine(stockCode,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH),
-                currentBeginTime.get(Calendar.YEAR),
-                currentBeginTime.get(Calendar.MONTH),
-                currentBeginTime.get(Calendar.DAY_OF_MONTH),
+        Subscription subscription = StockApiRequest.getKLine(stockCode,
+                calendar.getTime(),
+                currentBeginTime.getTime(),
                 getKLineType(kLineType))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<YahooResponse>() {
+                .subscribe(new Action1<List<KLineBean>>() {
                     @Override
-                    public void call(YahooResponse yahooResponse) {
+                    public void call(List<KLineBean> response) {
                         baseView.onFinishRequest(requestCode);
 
-                        if (yahooResponse.getKLineList().size() == 0) {
+                        if (response == null || response.size() == 0) {
                             baseView.onResultEmpty(requestCode);
                         } else {
                             computeNextTime(currentBeginTime, kLineType, true);
-                            baseView.onSuccess(requestCode, yahooResponse);
+                            baseView.onSuccess(requestCode, response);
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -84,25 +81,21 @@ public class YahooStockPresenter extends BasePresenter<YahooStockView> {
         calendar.setTime(currentEndTime.getTime());
         computeNextTime(calendar, kLineType, false);
 
-        Subscription subscription = YahooApiRequest.getKLine(stockCode,
-                currentEndTime.get(Calendar.YEAR),
-                currentEndTime.get(Calendar.MONTH),
-                currentEndTime.get(Calendar.DAY_OF_MONTH),
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH),
+        Subscription subscription = StockApiRequest.getKLine(stockCode,
+                currentEndTime.getTime(),
+                calendar.getTime(),
                 getKLineType(kLineType))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<YahooResponse>() {
+                .subscribe(new Action1<List<KLineBean>>() {
                     @Override
-                    public void call(YahooResponse yahooResponse) {
+                    public void call(List<KLineBean> response) {
                         baseView.onFinishRequest(requestCode);
 
-                        if (yahooResponse.getKLineList().size() == 0) {
+                        if (response == null || response.size() == 0) {
                             baseView.onResultEmpty(requestCode);
                         } else {
                             computeNextTime(currentEndTime, kLineType, false);
-                            baseView.onSuccess(requestCode, yahooResponse);
+                            baseView.onSuccess(requestCode, response);
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -120,15 +113,15 @@ public class YahooStockPresenter extends BasePresenter<YahooStockView> {
         String type = "d";
         switch (kLineType) {
             case DAY:
-                type = "d";
+                type = "D";
                 break;
 
             case WEEK:
-                type = "w";
+                type = "W";
                 break;
 
             case MONTH:
-                type = "m";
+                type = "M";
                 break;
         }
 

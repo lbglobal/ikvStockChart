@@ -1,13 +1,13 @@
 package com.wordplat.quickstart.bean;
 
 /**
- * <p>YahooKLineBean</p>
+ * <p>KLineBean</p>
  * <p>Date: 2017/4/11</p>
  *
  * @author afon
  */
 
-public class YahooKLineBean {
+public class KLineBean {
 
     private float open;
 
@@ -21,36 +21,51 @@ public class YahooKLineBean {
 
     private String date;
 
-    public YahooKLineBean(float open, float high, float low, float close, int volume, String date) {
-        this.open = open;
-        this.high = high;
-        this.low = low;
-        this.close = close;
-        this.volume = volume;
-        this.date = date;
-    }
-
     public float getOpen() {
         return open;
+    }
+
+    public void setOpen(float open) {
+        this.open = open;
     }
 
     public float getHigh() {
         return high;
     }
 
+    public void setHigh(float high) {
+        this.high = high;
+    }
+
     public float getLow() {
         return low;
+    }
+
+    public void setLow(float low) {
+        this.low = low;
     }
 
     public float getClose() {
         return close;
     }
 
+    public void setClose(float close) {
+        this.close = close;
+    }
+
     public int getVolume() {
         return volume;
     }
 
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

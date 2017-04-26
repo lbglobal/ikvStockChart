@@ -11,7 +11,7 @@ import com.chanven.lib.cptr.PtrDefaultHandler;
 import com.chanven.lib.cptr.PtrFrameLayout;
 import com.wordplat.quickstart.R;
 import com.wordplat.quickstart.fragment.KLineFragment;
-import com.wordplat.quickstart.mvp.YahooStockPresenter;
+import com.wordplat.quickstart.mvp.StockPresenter;
 import com.wordplat.quickstart.widget.pulllistview.PullListLayout;
 
 import org.xutils.view.annotation.ContentView;
@@ -44,9 +44,9 @@ public class With_Fragment_And_TabLayout_Switcher_Example_Activity extends BaseA
     private void initUI() {
         pullListLayout.setPtrHandler(ptrHandler);
 
-        dayKLineFragment = KLineFragment.newInstance(YahooStockPresenter.KLineType.DAY);
-        weekKLineFragment = KLineFragment.newInstance(YahooStockPresenter.KLineType.WEEK);
-        monthKLineFragment = KLineFragment.newInstance(YahooStockPresenter.KLineType.MONTH);
+        dayKLineFragment = KLineFragment.newInstance(StockPresenter.KLineType.DAY);
+        weekKLineFragment = KLineFragment.newInstance(StockPresenter.KLineType.WEEK);
+        monthKLineFragment = KLineFragment.newInstance(StockPresenter.KLineType.MONTH);
 
         final String[] tabStrings = new String[]{"日K", "周K", "月K"};
 

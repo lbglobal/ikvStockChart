@@ -1,6 +1,7 @@
 package com.wordplat.quickstart.mvp;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.wordplat.quickstart.BuildConfig;
@@ -79,29 +80,38 @@ public abstract class BasePresenter<T extends BaseView> {
     }
 
     protected void handleError(int requestCode, Throwable throwable) {
-        if(BuildConfig.DEBUG) {
-            throwable.printStackTrace();
-        }
+        final String errMessage;
 
         if(throwable instanceof NoNetworkException) { // 没有网络
+            errMessage = "onNoNetworkError --> " + requestCode;
             baseView.onNoNetworkError(requestCode);
 
         } else if(throwable instanceof NetworkTimeOutException) { // 网络超时
+            errMessage = "onNetworkTimeOutError --> " + requestCode;
             baseView.onNetworkTimeOutError(requestCode);
 
         } else if(throwable instanceof ResultParseException) { // 服务器返回的 JSON 数据解析错误
+            errMessage = "onResultParseError --> " + requestCode;
             baseView.onResultParseError(requestCode);
 
         } else if(throwable instanceof ResultEmptyException) { // 服务器返回结果为空
+            errMessage = "onResultEmpty --> " + requestCode;
             baseView.onResultEmpty(requestCode);
 
         } else if(throwable instanceof ResultFailedException) { // 服务器返回错误码
+            errMessage = "onResultFailed --> " + requestCode;
             baseView.onResultFailed(requestCode,
                     ((ResultFailedException) throwable).getErrCode(),
                     ((ResultFailedException) throwable).getErrMessage());
 
         } else { // 其它不知道的错误，除非在设置UI时发生了错误，否则不会走到这里
+            errMessage = "Warning_Unknow -->" + requestCode;
             baseView.onShowWarning(requestCode, R.string.Warning_Unknow);
+        }
+
+        if(BuildConfig.DEBUG) {
+            Log.e("BasePresenter", "##d handleError: " + errMessage);
+            throwable.printStackTrace();
         }
     }
 }

@@ -12,10 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wordplat.quickstart.R;
-import com.wordplat.quickstart.bean.YahooKLineBean;
-import com.wordplat.quickstart.bean.response.YahooResponse;
-import com.wordplat.quickstart.mvp.YahooStockListener;
-import com.wordplat.quickstart.mvp.YahooStockPresenter;
+import com.wordplat.quickstart.bean.KLineBean;
+import com.wordplat.quickstart.mvp.StockListener;
+import com.wordplat.quickstart.mvp.StockPresenter;
 import com.wordplat.ikvstockchart.InteractiveKLineLayout;
 import com.wordplat.ikvstockchart.KLineHandler;
 import com.wordplat.ikvstockchart.entry.Entry;
@@ -25,6 +24,8 @@ import com.wordplat.ikvstockchart.render.KLineRender;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+
+import java.util.List;
 
 /**
  * <p>KLineFragment</p>
@@ -43,16 +44,16 @@ public class KLineFragment extends BaseFragment {
     @ViewInject(R.id.Left_Loading_Image) private ImageView Left_Loading_Image = null;
     @ViewInject(R.id.Right_Loading_Image) private ImageView Right_Loading_Image = null;
 
-    private static final String STOCK_CODE = "XOM";
+    private static final String STOCK_CODE = "600030"; // 中信证券
     private static final int REQUEST_XOM_FIRST = 1;
     private static final int REQUEST_XOM_PREV = 2;
     private static final int REQUEST_XOM_NEXT = 3;
 
-    private YahooStockPresenter.KLineType kLineType;
+    private StockPresenter.KLineType kLineType;
 
     private final EntrySet entrySet = new EntrySet();
 
-    private final YahooStockPresenter presenter = new YahooStockPresenter();
+    private final StockPresenter presenter = new StockPresenter();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class KLineFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        presenter.attachView(yahooStockListener);
+        presenter.attachView(stockListener);
         presenter.loadFirst(REQUEST_XOM_FIRST, STOCK_CODE, kLineType);
     }
 
@@ -77,7 +78,7 @@ public class KLineFragment extends BaseFragment {
     }
 
     private void initUI() {
-        kLineType = (YahooStockPresenter.KLineType) getArguments().getSerializable(A);
+        kLineType = (StockPresenter.KLineType) getArguments().getSerializable(A);
 
         kLineLayout.setKLineHandler(new KLineHandler() {
             @Override
@@ -211,7 +212,7 @@ public class KLineFragment extends BaseFragment {
         return spanString;
     }
 
-    private YahooStockListener yahooStockListener = new YahooStockListener() {
+    private StockListener stockListener = new StockListener() {
         @Override
         public void onStartRequest(int requestCode) {
             switch (requestCode) {
@@ -243,16 +244,16 @@ public class KLineFragment extends BaseFragment {
         }
 
         @Override
-        public void onSuccess(int requestCode, YahooResponse response) {
+        public void onSuccess(int requestCode, List<KLineBean> response) {
             switch (requestCode) {
                 case REQUEST_XOM_FIRST:
-                    for (YahooKLineBean yahooKLineBean : response.getKLineList()) {
-                        entrySet.addEntry(new Entry(yahooKLineBean.getOpen(),
-                                yahooKLineBean.getHigh(),
-                                yahooKLineBean.getLow(),
-                                yahooKLineBean.getClose(),
-                                yahooKLineBean.getVolume(),
-                                yahooKLineBean.getDate()));
+                    for (KLineBean kLineBean : response) {
+                        entrySet.addEntry(new Entry(kLineBean.getOpen(),
+                                kLineBean.getHigh(),
+                                kLineBean.getLow(),
+                                kLineBean.getClose(),
+                                kLineBean.getVolume(),
+                                kLineBean.getDate()));
                     }
                     entrySet.computeStockIndex();
                     kLineLayout.getKLineView().setEntrySet(entrySet);
@@ -260,32 +261,32 @@ public class KLineFragment extends BaseFragment {
                     break;
 
                 case REQUEST_XOM_PREV:
-                    for (int i = response.getKLineList().size() - 1 ; i >= 0 ; i--) {
-                        YahooKLineBean yahooKLineBean = response.getKLineList().get(i);
-                        entrySet.insertFirst(new Entry(yahooKLineBean.getOpen(),
-                                yahooKLineBean.getHigh(),
-                                yahooKLineBean.getLow(),
-                                yahooKLineBean.getClose(),
-                                yahooKLineBean.getVolume(),
-                                yahooKLineBean.getDate()));
+                    for (int i = response.size() - 1 ; i >= 0 ; i--) {
+                        KLineBean kLineBean = response.get(i);
+                        entrySet.insertFirst(new Entry(kLineBean.getOpen(),
+                                kLineBean.getHigh(),
+                                kLineBean.getLow(),
+                                kLineBean.getClose(),
+                                kLineBean.getVolume(),
+                                kLineBean.getDate()));
                     }
                     entrySet.computeStockIndex();
                     kLineLayout.getKLineView().notifyDataSetChanged();
-                    kLineLayout.getKLineView().refreshComplete(response.getKLineList().size() > 0);
+                    kLineLayout.getKLineView().refreshComplete(response.size() > 0);
                     break;
 
                 case REQUEST_XOM_NEXT:
-                    for (YahooKLineBean yahooKLineBean : response.getKLineList()) {
-                        entrySet.addEntry(new Entry(yahooKLineBean.getOpen(),
-                                yahooKLineBean.getHigh(),
-                                yahooKLineBean.getLow(),
-                                yahooKLineBean.getClose(),
-                                yahooKLineBean.getVolume(),
-                                yahooKLineBean.getDate()));
+                    for (KLineBean kLineBean : response) {
+                        entrySet.addEntry(new Entry(kLineBean.getOpen(),
+                                kLineBean.getHigh(),
+                                kLineBean.getLow(),
+                                kLineBean.getClose(),
+                                kLineBean.getVolume(),
+                                kLineBean.getDate()));
                     }
                     entrySet.computeStockIndex();
                     kLineLayout.getKLineView().notifyDataSetChanged();
-                    kLineLayout.getKLineView().refreshComplete(response.getKLineList().size() > 0);
+                    kLineLayout.getKLineView().refreshComplete(response.size() > 0);
                     break;
             }
         }
@@ -294,6 +295,8 @@ public class KLineFragment extends BaseFragment {
         public void onResultEmpty(int requestCode) {
             switch (requestCode) {
                 case REQUEST_XOM_FIRST:
+                    entrySet.setLoadingStatus(false);
+                    kLineLayout.getKLineView().invalidate();
                     break;
 
                 case REQUEST_XOM_PREV:
@@ -311,7 +314,7 @@ public class KLineFragment extends BaseFragment {
 
     private static final String A = "a";
 
-    public static KLineFragment newInstance(YahooStockPresenter.KLineType kLineType) {
+    public static KLineFragment newInstance(StockPresenter.KLineType kLineType) {
         Bundle args = new Bundle();
         args.putSerializable(A, kLineType);
 

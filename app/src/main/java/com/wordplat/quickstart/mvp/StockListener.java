@@ -1,13 +1,13 @@
 package com.wordplat.quickstart.mvp;
 
 /**
- * <p>YahooStockListener</p>
+ * <p>StockListener</p>
  * <p>Date: 2017/4/11</p>
  *
  * @author afon
  */
 
-public abstract class YahooStockListener implements YahooStockView {
+public abstract class StockListener implements StockView {
 
     @Override
     public void onNoNetworkError(int requestCode) {
