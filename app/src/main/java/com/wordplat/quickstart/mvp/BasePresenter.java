@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import com.wordplat.quickstart.BuildConfig;
 import com.wordplat.quickstart.R;
+import com.wordplat.quickstart.app.AppRuntime;
 import com.wordplat.quickstart.mvp.exception.NetworkTimeOutException;
 import com.wordplat.quickstart.mvp.exception.NoNetworkException;
 import com.wordplat.quickstart.mvp.exception.ResultEmptyException;
@@ -77,6 +78,16 @@ public abstract class BasePresenter<T extends BaseView> {
             return true;
         }
         return false;
+    }
+
+    public String getString(int stringResId) {
+        if (stringResId != 0) {
+            if (AppRuntime.sContext != null) {
+                return AppRuntime.sContext.getResources().getString(stringResId);
+            }
+        }
+
+        return "";
     }
 
     protected void handleError(int requestCode, Throwable throwable) {

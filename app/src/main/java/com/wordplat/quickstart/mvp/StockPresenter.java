@@ -17,7 +17,7 @@ import rx.functions.Action1;
  * @author afon
  */
 
-public class StockPresenter extends BasePresenter<StockView> {
+public class StockPresenter extends BasePresenter<LoadingView> {
 
     private static final int LOAD_BETWEEN_DAYS = 100; // 日 K 一次加载多少天
     private static final int LOAD_BETWEEN_WEEK = 50; // 周 K 一次加载多少周
@@ -25,6 +25,8 @@ public class StockPresenter extends BasePresenter<StockView> {
 
     private final Calendar currentBeginTime = Calendar.getInstance();
     private final Calendar currentEndTime = Calendar.getInstance();
+
+    private List<KLineBean> kLineList;
 
     public enum KLineType {
         DAY,
@@ -60,7 +62,9 @@ public class StockPresenter extends BasePresenter<StockView> {
                             baseView.onResultEmpty(requestCode);
                         } else {
                             computeNextTime(currentBeginTime, kLineType, true);
-                            baseView.onSuccess(requestCode, response);
+
+                            kLineList = response;
+                            baseView.onSuccess(requestCode);
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -95,7 +99,9 @@ public class StockPresenter extends BasePresenter<StockView> {
                             baseView.onResultEmpty(requestCode);
                         } else {
                             computeNextTime(currentEndTime, kLineType, false);
-                            baseView.onSuccess(requestCode, response);
+
+                            kLineList = response;
+                            baseView.onSuccess(requestCode);
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -107,6 +113,10 @@ public class StockPresenter extends BasePresenter<StockView> {
                 });
 
         addSubscription(subscription);
+    }
+
+    public List<KLineBean> getkLineList() {
+        return kLineList;
     }
 
     private String getKLineType(KLineType kLineType) {

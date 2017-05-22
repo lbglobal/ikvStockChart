@@ -32,6 +32,9 @@ public class ServerRequestParams extends RequestParams {
         params = new JSONObject();
 
         requestJson = new JSONObject();
+
+        setMaxRetryCount(2);
+        setConnectTimeout(10000);
     }
 
     public void addRequestParams(String key, Object value) {

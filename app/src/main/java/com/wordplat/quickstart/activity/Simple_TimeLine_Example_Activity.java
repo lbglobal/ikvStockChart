@@ -10,9 +10,8 @@ import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.render.TimeLineRender;
 import com.wordplat.quickstart.R;
 import com.wordplat.quickstart.bean.BtcBean;
-import com.wordplat.quickstart.bean.response.BtcChinaResponse;
-import com.wordplat.quickstart.mvp.BtcChinaListener;
 import com.wordplat.quickstart.mvp.BtcChinaPresenter;
+import com.wordplat.quickstart.mvp.LoadingViewListener;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -62,7 +61,7 @@ public class Simple_TimeLine_Example_Activity extends BaseActivity {
         timeLineView.setRender(new TimeLineRender());
     }
 
-    private BtcChinaListener btcChinaListener = new BtcChinaListener() {
+    private LoadingViewListener btcChinaListener = new LoadingViewListener() {
         @Override
         public void onStartRequest(int requestCode) {
 
@@ -74,8 +73,8 @@ public class Simple_TimeLine_Example_Activity extends BaseActivity {
         }
 
         @Override
-        public void onSuccess(int requestCode, BtcChinaResponse response) {
-            for (BtcBean btcBean : response.getBtcList()) {
+        public void onSuccess(int requestCode) {
+            for (BtcBean btcBean : presenter.getBtcList()) {
                 Entry entry = new Entry(btcBean.getPrice(), (int) btcBean.getAmount(), "");
                 entrySet.addEntry(entry);
             }
@@ -87,6 +86,18 @@ public class Simple_TimeLine_Example_Activity extends BaseActivity {
         public void onResultEmpty(int requestCode) {
             entrySet.setLoadingStatus(false);
             timeLineView.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onNoNetworkError(int requestCode) {
+            super.onNoNetworkError(requestCode);
+            onResultEmpty(requestCode);
+        }
+
+        @Override
+        public void onNetworkTimeOutError(int requestCode) {
+            super.onNetworkTimeOutError(requestCode);
+            onResultEmpty(requestCode);
         }
     };
 

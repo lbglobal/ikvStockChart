@@ -1,3 +1,5 @@
 <resources>
     <string name="Warning_Unknow">程序发生了错误</string>
+    <string name="Warning_No_Network">当前网络不给力，请检查您的网络设置</string>
+    <string name="Warning_Network_Timeout">当前网络不给力，请稍后重试</string>
 </resources>

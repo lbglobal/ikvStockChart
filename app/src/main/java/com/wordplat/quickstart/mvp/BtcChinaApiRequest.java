@@ -3,10 +3,11 @@ package com.wordplat.quickstart.mvp;
 import android.util.Log;
 
 import com.wordplat.quickstart.BuildConfig;
-import com.wordplat.quickstart.bean.response.BtcChinaResponse;
+import com.wordplat.quickstart.bean.BtcBean;
 
 import org.xutils.http.RequestParams;
 
+import java.util.List;
 import java.util.Locale;
 
 import rx.Observable;
@@ -25,10 +26,10 @@ public class BtcChinaApiRequest extends BaseRequest {
 
     private static final String URL = "https://data.btcchina.com/data/historydata?since=%d&limit=%d";
 
-    public static Observable<BtcChinaResponse> getHistoryData(final int id, final int limit) {
-        return Observable.create(new Observable.OnSubscribe<BtcChinaResponse>() {
+    public static Observable<List<BtcBean>> getHistoryData(final int id, final int limit) {
+        return Observable.create(new Observable.OnSubscribe<List<BtcBean>>() {
             @Override
-            public void call(Subscriber<? super BtcChinaResponse> subscriber) {
+            public void call(Subscriber<? super List<BtcBean>> subscriber) {
                 String url = String.format(Locale.ENGLISH,
                         URL,
                         id,
@@ -38,7 +39,7 @@ public class BtcChinaApiRequest extends BaseRequest {
                     Log.d(TAG, "##d 请求参数: " + url);
                 }
 
-                requestObject(subscriber, new RequestParams(url), BtcChinaResponse.class);
+                requestArray(subscriber, new RequestParams(url), BtcBean.class);
             }
         }).subscribeOn(Schedulers.io());
     }

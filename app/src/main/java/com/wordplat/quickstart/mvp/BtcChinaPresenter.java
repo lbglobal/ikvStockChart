@@ -1,6 +1,8 @@
 package com.wordplat.quickstart.mvp;
 
-import com.wordplat.quickstart.bean.response.BtcChinaResponse;
+import com.wordplat.quickstart.bean.BtcBean;
+
+import java.util.List;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -13,19 +15,23 @@ import rx.functions.Action1;
  * @author afon
  */
 
-public class BtcChinaPresenter extends BasePresenter<BtcChinaView> {
+public class BtcChinaPresenter extends BasePresenter<LoadingView> {
+
+    private List<BtcBean> btcList;
 
     public void getSimple(final int requestCode) {
         baseView.onStartRequest(requestCode);
 
-        Subscription subscription = BtcChinaApiRequest.getHistoryData(5000, 300)
+        Subscription subscription = BtcChinaApiRequest.getHistoryData(5000, 600)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<BtcChinaResponse>() {
+                .subscribe(new Action1<List<BtcBean>>() {
                     @Override
-                    public void call(BtcChinaResponse response) {
+                    public void call(List<BtcBean> response) {
                         baseView.onFinishRequest(requestCode);
-                        if (response.getBtcList() != null && response.getBtcList().size() > 0) {
-                            baseView.onSuccess(requestCode, response);
+                        if (response != null && response.size() > 0) {
+                            btcList = response;
+
+                            baseView.onSuccess(requestCode);
                         } else {
                             baseView.onResultEmpty(requestCode);
                         }
@@ -39,5 +45,9 @@ public class BtcChinaPresenter extends BasePresenter<BtcChinaView> {
                 });
 
         addSubscription(subscription);
+    }
+
+    public List<BtcBean> getBtcList() {
+        return btcList;
     }
 }

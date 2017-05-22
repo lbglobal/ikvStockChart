@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.wordplat.quickstart.R;
 import com.wordplat.quickstart.bean.KLineBean;
-import com.wordplat.quickstart.mvp.StockListener;
+import com.wordplat.quickstart.mvp.LoadingViewListener;
 import com.wordplat.quickstart.mvp.StockPresenter;
 import com.wordplat.ikvstockchart.InteractiveKLineLayout;
 import com.wordplat.ikvstockchart.KLineHandler;
@@ -66,7 +66,7 @@ public class KLineFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        presenter.attachView(stockListener);
+        presenter.attachView(viewListener);
         presenter.loadFirst(REQUEST_XOM_FIRST, STOCK_CODE, kLineType);
     }
 
@@ -212,7 +212,7 @@ public class KLineFragment extends BaseFragment {
         return spanString;
     }
 
-    private StockListener stockListener = new StockListener() {
+    private LoadingViewListener viewListener = new LoadingViewListener() {
         @Override
         public void onStartRequest(int requestCode) {
             switch (requestCode) {
@@ -244,7 +244,9 @@ public class KLineFragment extends BaseFragment {
         }
 
         @Override
-        public void onSuccess(int requestCode, List<KLineBean> response) {
+        public void onSuccess(int requestCode) {
+            List<KLineBean> response = presenter.getkLineList();
+
             switch (requestCode) {
                 case REQUEST_XOM_FIRST:
                     for (KLineBean kLineBean : response) {
@@ -296,7 +298,7 @@ public class KLineFragment extends BaseFragment {
             switch (requestCode) {
                 case REQUEST_XOM_FIRST:
                     entrySet.setLoadingStatus(false);
-                    kLineLayout.getKLineView().invalidate();
+                    kLineLayout.getKLineView().notifyDataSetChanged();
                     break;
 
                 case REQUEST_XOM_PREV:
@@ -307,6 +309,30 @@ public class KLineFragment extends BaseFragment {
                 case REQUEST_XOM_NEXT:
                     kLineLayout.getKLineView().refreshComplete(false);
                     Toast.makeText(mActivity, "已经到达最右边了", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+
+        @Override
+        public void onNetworkTimeOutError(int requestCode) {
+            super.onNetworkTimeOutError(requestCode);
+
+            switch (requestCode) {
+                case REQUEST_XOM_FIRST:
+                    entrySet.setLoadingStatus(false);
+                    kLineLayout.getKLineView().notifyDataSetChanged();
+                    break;
+            }
+        }
+
+        @Override
+        public void onNoNetworkError(int requestCode) {
+            super.onNoNetworkError(requestCode);
+
+            switch (requestCode) {
+                case REQUEST_XOM_FIRST:
+                    entrySet.setLoadingStatus(false);
+                    kLineLayout.getKLineView().notifyDataSetChanged();
                     break;
             }
         }

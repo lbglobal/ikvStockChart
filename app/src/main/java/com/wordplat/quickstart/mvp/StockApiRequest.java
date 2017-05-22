@@ -13,7 +13,7 @@ import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 /**
- * <p>雅虎财经股票 API 接口请求</p>
+ * <p>自己搭建的股票 API 服务器接口，这个接口有可能会不响应，是网上别人写的程序，我也不知道怎么回事</p>
  * <p>Date: 2017/4/11</p>
  *
  * @author afon
