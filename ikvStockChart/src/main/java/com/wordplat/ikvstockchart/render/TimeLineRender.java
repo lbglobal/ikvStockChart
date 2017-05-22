@@ -69,7 +69,7 @@ public class TimeLineRender extends AbstractRender {
     public void setEntrySet(EntrySet entrySet) {
         super.setEntrySet(entrySet);
 
-        postMatrixTouch(chartRect.width(), entrySet.getEntryList().size());
+        postMatrixTouch(chartRect.width(), sizeColor.getTimeLineMaxCount());
 
         entrySet.computeTimeLineMinMax(0, entrySet.getEntryList().size());
         computeExtremumValue(extremumY, entrySet.getMinY(), entrySet.getDeltaY());

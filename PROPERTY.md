@@ -32,27 +32,30 @@
 
 ### 与分时图有关的属性和方法
 
-| XML               | Java Code        | Comment | Since |
-| ----------------- | ---------------- | ------- | ----- |
-| app:timeLineSize  | setTimeLineSize  | 分时线大小   | 0.1.0 |
-| app:timeLineColor | setTimeLineColor | 分时线颜色   | 0.1.0 |
+| XML                  | Java Code           | Comment                                  | Since |
+| -------------------- | ------------------- | ---------------------------------------- | ----- |
+| app:timeLineSize     | setTimeLineSize     | 分时线大小                                    | 0.1.0 |
+| app:timeLineColor    | setTimeLineColor    | 分时线颜色                                    | 0.1.0 |
+| app:timeLineMaxCount | setTimeLineMaxCount | 分时图 entry 最多个数。注：此值与 entrySet 里的 entries.size() 意义不同，这里指 X 轴上最多能容纳多少个 entry | 0.1.4 |
 
 
 
 ### 与蜡烛图有关的属性和方法
 
-| XML                             | Java Code                      | Comment      | Since |
-| ------------------------------- | ------------------------------ | ------------ | ----- |
-| app:candleBorderSize            | setCandleBorderSize            | 蜡烛图矩形边框大小    | 0.1.0 |
-| app:candleExtremumLabelSize     | setCandleExtremumLabelSize     | 蜡烛图极值字符大小    | 0.1.0 |
-| app:candleExtremumLableColor    | setCandleExtremumLableColor    | 蜡烛图极值字符颜色    | 0.1.0 |
-| app:shadowSize                  | setShadowSize                  | 影线大小         | 0.1.0 |
-| app:increasingColor             | setIncreasingColor             | 上涨颜色         | 0.1.0 |
-| app:decreasingColor             | setDecreasingColor             | 下跌颜色         | 0.1.0 |
-| app:neutralColor                | setNeutralColor                | 不涨不跌颜色       | 0.1.0 |
-| app:portraitDefaultVisibleCount | setPortraitDefaultVisibleCount | 竖屏默认显示多少个蜡烛图 | 0.1.0 |
-| app:zoomInTimes                 | setZoomInTimes                 | 最多放大次数       | 0.1.0 |
-| app:zoomOutTimes                | setZoomOutTimes                | 最多缩小次数       | 0.1.0 |
+| XML                             | Java Code                      | Comment        | Since |
+| ------------------------------- | ------------------------------ | -------------- | ----- |
+| app:candleBorderSize            | setCandleBorderSize            | 蜡烛图矩形边框大小      | 0.1.0 |
+| app:candleExtremumLabelSize     | setCandleExtremumLabelSize     | 蜡烛图极值字符大小      | 0.1.0 |
+| app:candleExtremumLableColor    | setCandleExtremumLableColor    | 蜡烛图极值字符颜色      | 0.1.0 |
+| app:shadowSize                  | setShadowSize                  | 影线大小           | 0.1.0 |
+| app:increasingColor             | setIncreasingColor             | 上涨颜色           | 0.1.0 |
+| app:decreasingColor             | setDecreasingColor             | 下跌颜色           | 0.1.0 |
+| app:neutralColor                | setNeutralColor                | 不涨不跌颜色         | 0.1.0 |
+| app:portraitDefaultVisibleCount | setPortraitDefaultVisibleCount | 竖屏默认显示多少个蜡烛图   | 0.1.0 |
+| app:zoomInTimes                 | setZoomInTimes                 | 最多放大次数         | 0.1.0 |
+| app:zoomOutTimes                | setZoomOutTimes                | 最多缩小次数         | 0.1.0 |
+| app:increasingStyle             | setIncreasingStyle             | 上涨蜡烛图填充样式。默认实心 | 0.1.4 |
+| app:decreasingStyle             | setDecreasingStyle             | 下跌蜡烛图填充样式，默认实心 | 0.1.4 |
 
 
 

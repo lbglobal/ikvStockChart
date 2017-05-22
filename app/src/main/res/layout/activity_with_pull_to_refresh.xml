@@ -10,7 +10,9 @@
     <com.wordplat.ikvstockchart.InteractiveKLineLayout
         android:id="@+id/kLineLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:increasingStyle="stroke"
+        app:decreasingStyle="stroke">
 
         <TextView
             android:id="@+id/MA_Text"

@@ -4,36 +4,54 @@
 
         <!-- 与轴、网格有关的属性 -->
 
+        <!-- X 轴标签字符大小 -->
         <attr name="xLabelSize" format="dimension" />
+        <!-- X 轴标签字符颜色 -->
         <attr name="xLabelColor" format="color" />
+        <!-- X 轴 Label 区域的高度 -->
         <attr name="xLabelViewHeight" format="dimension" />
 
+        <!-- Y 轴标签字符大小 -->
         <attr name="yLabelSize" format="dimension" />
+        <!-- Y 轴标签字符颜色 -->
         <attr name="yLabelColor" format="color" />
+        <!-- Y 轴标签对齐方向 -->
         <attr name="yLabelAlign">
             <enum name="left" value="0" />
             <enum name="right" value="1" />
         </attr>
 
+        <!-- 轴线条大小 -->
         <attr name="axisSize" format="dimension" />
+        <!-- 轴线条颜色 -->
         <attr name="axisColor" format="color" />
+        <!-- 网格线大小 -->
         <attr name="gridSize" format="dimension" />
+        <!-- 网格线颜色 -->
         <attr name="gridColor" format="color" />
 
         <!-- 与高亮、MarkerView 有关的属性 -->
 
+        <!-- 高亮线条大小 -->
         <attr name="highlightSize" format="dimension" />
+        <!-- 高亮线条颜色 -->
         <attr name="highlightColor" format="color" />
 
+        <!-- MarkerView 边框大小 -->
         <attr name="markerBorderSize" format="dimension" />
+        <!-- MarkerView 边框颜色 -->
         <attr name="markerBorderColor" format="color" />
+        <!-- MarkerView 字符大小 -->
         <attr name="markerTextSize" format="dimension" />
+        <!-- MarkerView 字符颜色 -->
         <attr name="markerTextColor" format="color" />
+        <!-- X 轴 MarkerView 对齐方向 -->
         <attr name="xMarkerAlign">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
             <enum name="auto" value="2" />
         </attr>
+        <!-- Y 轴 MarkerView 对齐方向 -->
         <attr name="yMarkerAlign">
             <enum name="left" value="0" />
             <enum name="right" value="1" />
@@ -42,21 +60,49 @@
 
         <!-- 与分时图有关的属性 -->
 
+        <!-- 分时线大小 -->
         <attr name="timeLineSize" format="dimension" />
+        <!-- 分时线颜色 -->
         <attr name="timeLineColor" format="color" />
+        <!-- 分时图 entry 最多个数。注：此值与 entrySet 里的 entries.size() 意义不同，这里指 X 轴上最多能容纳多少个 entry -->
+        <attr name="timeLineMaxCount" format="integer" />
 
         <!-- 与蜡烛图有关的属性 -->
 
+        <!-- 蜡烛图矩形边框大小 -->
         <attr name="candleBorderSize" format="dimension" />
+        <!-- 蜡烛图极值字符大小 -->
         <attr name="candleExtremumLabelSize" format="dimension" />
+        <!-- 蜡烛图极值字符颜色 -->
         <attr name="candleExtremumLableColor" format="color" />
+        <!-- 影线大小 -->
         <attr name="shadowSize" format="dimension" />
+        <!-- 上涨颜色 -->
         <attr name="increasingColor" format="color" />
+        <!-- 下跌颜色 -->
         <attr name="decreasingColor" format="color" />
+        <!-- 不涨不跌颜色 -->
         <attr name="neutralColor" format="color" />
+        <!-- 竖屏状态下的默认缩放倍数下显示多少个蜡烛图。注：横屏时会自动根据视图宽高变化比例计算，不需要手工设置 -->
         <attr name="portraitDefaultVisibleCount" format="integer" />
+        <!-- 最多放大次数 -->
         <attr name="zoomInTimes" format="integer" />
+        <!-- 最多缩小次数 -->
         <attr name="zoomOutTimes" format="integer" />
+        <!-- 上涨蜡烛图填充样式。默认实心 -->
+        <attr name="increasingStyle">
+            <!-- 实心 -->
+            <enum name="fill" value="0" />
+            <!-- 空心，仅描边 -->
+            <enum name="stroke" value="1" />
+        </attr>
+        <!-- 下跌蜡烛图填充样式，默认实心 -->
+        <attr name="decreasingStyle">
+            <!-- 实心 -->
+            <enum name="fill" value="0" />
+            <!-- 空心，仅描边 -->
+            <enum name="stroke" value="1" />
+        </attr>
 
         <!-- 与股票指标有关的属性 -->
 

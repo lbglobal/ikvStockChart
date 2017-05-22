@@ -121,6 +121,20 @@ public class CandleDrawing implements IDrawing {
                 candlePaint.setColor(sizeColor.getDecreasingColor());
             }
 
+            if (candlePaint.getColor() == sizeColor.getIncreasingColor()) {
+                if (sizeColor.getIncreasingStyle() == Paint.Style.STROKE) {
+                    candlePaint.setStyle(Paint.Style.STROKE);
+                } else {
+                    candlePaint.setStyle(Paint.Style.FILL);
+                }
+            } else {
+                if (sizeColor.getDecreasingStyle() == Paint.Style.STROKE) {
+                    candlePaint.setStyle(Paint.Style.STROKE);
+                } else {
+                    candlePaint.setStyle(Paint.Style.FILL);
+                }
+            }
+
             // 绘制 影线
             candleLineBuffer[0] = i + 0.5f;
             candleLineBuffer[2] = i + 0.5f;

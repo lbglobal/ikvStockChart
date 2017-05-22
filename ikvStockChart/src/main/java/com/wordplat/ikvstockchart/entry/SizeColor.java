@@ -18,6 +18,8 @@
 
 package com.wordplat.ikvstockchart.entry;
 
+import android.graphics.Paint;
+
 import com.wordplat.ikvstockchart.align.XMarkerAlign;
 import com.wordplat.ikvstockchart.align.YLabelAlign;
 import com.wordplat.ikvstockchart.align.YMarkerAlign;
@@ -211,6 +213,7 @@ public class SizeColor {
 
     private float timeLineSize = 2f; // 分时线大小
     private int timeLineColor = 0xff82b1ff; // 分时线颜色
+    private int timeLineMaxCount = 240; // 分时图 entry 最多个数。注：此值与 entrySet 里的 entries.size() 意义不同，这里指 X 轴上最多能容纳多少个 entry
 
     public float getTimeLineSize() {
         return timeLineSize;
@@ -228,6 +231,14 @@ public class SizeColor {
         this.timeLineColor = timeLineColor;
     }
 
+    public int getTimeLineMaxCount() {
+        return timeLineMaxCount;
+    }
+
+    public void setTimeLineMaxCount(int timeLineMaxCount) {
+        this.timeLineMaxCount = timeLineMaxCount;
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // 与蜡烛图有关的属性和方法
     ///////////////////////////////////////////////////////////////////////////
@@ -241,9 +252,12 @@ public class SizeColor {
     private int decreasingColor = 0xff4fb86a; // 下跌颜色
     private int neutralColor = 0xff282b34; // 不涨不跌颜色
 
-    private int portraitDefaultVisibleCount = 50; // 竖屏状态下的默认缩放倍数下显示多少个蜡烛图，横屏时会自动根据视图宽高变化比例计算，不需要手工设置
+    private int portraitDefaultVisibleCount = 50; // 竖屏状态下的默认缩放倍数下显示多少个蜡烛图。注：横屏时会自动根据视图宽高变化比例计算，不需要手工设置
     private int zoomInTimes = 3; // 最多放大次数
     private int zoomOutTimes = 3; // 最多缩小次数
+
+    private Paint.Style increasingStyle = Paint.Style.FILL; // 上涨蜡烛图填充样式。默认实心
+    private Paint.Style decreasingStyle = Paint.Style.STROKE; // 下跌蜡烛图填充样式，默认实心
 
     public float getCandleBorderSize() {
         return candleBorderSize;
@@ -323,6 +337,22 @@ public class SizeColor {
 
     public void setZoomOutTimes(int zoomOutTimes) {
         this.zoomOutTimes = zoomOutTimes;
+    }
+
+    public Paint.Style getIncreasingStyle() {
+        return increasingStyle;
+    }
+
+    public void setIncreasingStyle(Paint.Style increasingStyle) {
+        this.increasingStyle = increasingStyle;
+    }
+
+    public Paint.Style getDecreasingStyle() {
+        return decreasingStyle;
+    }
+
+    public void setDecreasingStyle(Paint.Style decreasingStyle) {
+        this.decreasingStyle = decreasingStyle;
     }
 
     ///////////////////////////////////////////////////////////////////////////

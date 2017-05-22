@@ -1,3 +1,13 @@
+### 0.1.4
+
+> 2017.05.22
+
+增加 蜡烛图实心空心设置
+
+fixed #10
+
+![](http://ww1.sinaimg.cn/large/006tNc79gy1ffu3gin235j30f00qoaar.jpg)
+
 ### 0.1.3
 
 > 2017.04.25

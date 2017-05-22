@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         app:yLabelAlign="right"
         app:xMarkerAlign="bottom"
-        app:yMarkerAlign="left"/>
+        app:yMarkerAlign="left"
+        app:decreasingStyle="stroke"/>
 
 </LinearLayout>

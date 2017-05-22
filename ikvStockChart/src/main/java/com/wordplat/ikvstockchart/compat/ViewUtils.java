@@ -20,6 +20,7 @@ package com.wordplat.ikvstockchart.compat;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -127,6 +128,9 @@ public class ViewUtils {
             sizeColor.setTimeLineColor(a.getColor(R.styleable.InteractiveKLineView_timeLineColor,
                     sizeColor.getTimeLineColor()));
 
+            sizeColor.setTimeLineMaxCount(a.getInteger(R.styleable.InteractiveKLineView_timeLineMaxCount,
+                    sizeColor.getTimeLineMaxCount()));
+
             // 与蜡烛图有关的属性
             sizeColor.setCandleBorderSize(a.getDimension(R.styleable.InteractiveKLineView_candleBorderSize,
                     sizeColor.getCandleBorderSize()));
@@ -157,6 +161,12 @@ public class ViewUtils {
 
             sizeColor.setZoomOutTimes(a.getInteger(R.styleable.InteractiveKLineView_zoomOutTimes,
                     sizeColor.getZoomOutTimes()));
+
+            int style = a.getInteger(R.styleable.InteractiveKLineView_increasingStyle, Paint.Style.FILL.ordinal());
+            sizeColor.setIncreasingStyle(Paint.Style.values()[style]);
+
+            style = a.getInteger(R.styleable.InteractiveKLineView_decreasingStyle, Paint.Style.FILL.ordinal());
+            sizeColor.setDecreasingStyle(Paint.Style.values()[style]);
 
             // 与股票指标有关的属性
             sizeColor.setMaLineSize(a.getDimension(R.styleable.InteractiveKLineView_maLineSize,

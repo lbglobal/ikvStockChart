@@ -1,6 +1,6 @@
 ## Features
 
-当前最新版本：0.1.3
+当前最新版本：0.1.4
 
 支持在 XML 布局文件和代码中设置各个线条颜色、大小配置
 
@@ -18,18 +18,26 @@
 
 ## Change log
 
-> 2017.04.25
+> 2017.05.22
 
-添加 设置 X 轴、Y 轴 MarkerView 对齐方向
+增加 蜡烛图实心空心设置
 
-![](http://ww1.sinaimg.cn/large/006tNbRwgy1feysmzj8atg30dc0nkdy5.gif)
+fixed #10
+
+![](http://ww1.sinaimg.cn/large/006tNc79gy1ffu3gin235j30f00qoaar.jpg)
 
 查看全部日志：[https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md](https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md)
 
 ## Usage
 
 ```groovy
-compile 'com.wordplat:ikvStockChart:0.1.3'
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.wordplat:ikvStockChart:0.1.4'
+}
 ```
 
 ```xml
