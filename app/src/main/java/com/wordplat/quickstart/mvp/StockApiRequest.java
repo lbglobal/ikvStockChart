@@ -13,7 +13,7 @@ import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 /**
- * <p>自己搭建的股票 API 服务器接口，这个接口有可能会不响应，是网上别人写的程序，我也不知道怎么回事</p>
+ * <p>自己搭建的股票 API 服务器接口</p>
  * <p>Date: 2017/4/11</p>
  *
  * @author afon
@@ -22,7 +22,7 @@ import rx.schedulers.Schedulers;
 public class StockApiRequest extends BaseRequest {
     private static final String TAG = "StockApiRequest";
 
-    private static final String URL = "http://wordplat.com:5000/ts/v1/get_k_data/%s";
+    private static final String URL = "https://api.wordplat.com/ts/v1/get_k_data/%s";
 
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

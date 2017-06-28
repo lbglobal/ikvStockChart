@@ -21,8 +21,6 @@ package com.wordplat.ikvstockchart;
 import android.content.Context;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -33,12 +31,15 @@ import com.wordplat.ikvstockchart.compat.ViewUtils;
 import com.wordplat.ikvstockchart.drawing.BOLLDrawing;
 import com.wordplat.ikvstockchart.drawing.HighlightDrawing;
 import com.wordplat.ikvstockchart.drawing.KDJDrawing;
+import com.wordplat.ikvstockchart.drawing.KLineVolumeDrawing;
+import com.wordplat.ikvstockchart.drawing.KLineVolumeHighlightDrawing;
 import com.wordplat.ikvstockchart.drawing.MACDDrawing;
 import com.wordplat.ikvstockchart.drawing.RSIDrawing;
 import com.wordplat.ikvstockchart.drawing.StockIndexYLabelDrawing;
 import com.wordplat.ikvstockchart.entry.Entry;
 import com.wordplat.ikvstockchart.entry.StockBOLLIndex;
 import com.wordplat.ikvstockchart.entry.StockKDJIndex;
+import com.wordplat.ikvstockchart.entry.StockKLineVolumeIndex;
 import com.wordplat.ikvstockchart.entry.StockMACDIndex;
 import com.wordplat.ikvstockchart.entry.StockRSIIndex;
 import com.wordplat.ikvstockchart.marker.XAxisTextMarkerView;
@@ -49,9 +50,11 @@ import com.wordplat.ikvstockchart.render.KLineRender;
  * <p>InteractiveKLineLayout</p>
  * <p>Date: 2017/3/22</p>
  *
+ * @deprecated 这是一个含有股票技术指标的K线图示例，建议不要使用这个类用于真实项目中，此示例对如何编写自己的自定义布局提供参考。
  * @author afon
  */
 
+@Deprecated
 public class InteractiveKLineLayout extends FrameLayout implements View.OnClickListener {
     private static final String TAG = "InteractiveKLineLayout";
 
@@ -71,7 +74,6 @@ public class InteractiveKLineLayout extends FrameLayout implements View.OnClickL
     private int stockIndexTabHeight;
     private RectF currentRect;
 
-    private View stockIndexView;
     private RadioGroup But_Group;
     private RadioButton MACD_But;
     private RadioButton RSI_But;
@@ -150,6 +152,12 @@ public class InteractiveKLineLayout extends FrameLayout implements View.OnClickL
             }
         });
 
+        // 成交量
+        StockKLineVolumeIndex kLineVolumeIndex = new StockKLineVolumeIndex(stockIndexViewHeight);
+        kLineVolumeIndex.addDrawing(new KLineVolumeDrawing());
+        kLineVolumeIndex.addDrawing(new KLineVolumeHighlightDrawing());
+        kLineRender.addStockIndex(kLineVolumeIndex);
+
         // MACD
         HighlightDrawing macdHighlightDrawing = new HighlightDrawing();
         macdHighlightDrawing.addMarkerView(new YAxisTextMarkerView(stockMarkerViewHeight));
@@ -198,27 +206,24 @@ public class InteractiveKLineLayout extends FrameLayout implements View.OnClickL
         kLineRender.addMarkerView(new XAxisTextMarkerView(stockMarkerViewHeight));
 
         addView(kLineView);
+    }
 
-        stockIndexView = LayoutInflater.from(context).inflate(R.layout.tab_stockindex, this, false);
-        But_Group = (RadioGroup) stockIndexView.findViewById(R.id.But_Group);
-        MACD_But = (RadioButton) stockIndexView.findViewById(R.id.MACD_But);
-        RSI_But = (RadioButton) stockIndexView.findViewById(R.id.RSI_But);
-        KDJ_But = (RadioButton) stockIndexView.findViewById(R.id.KDJ_But);
-        BOLL_But = (RadioButton) stockIndexView.findViewById(R.id.BOLL_But);
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
+        But_Group = (RadioGroup) findViewById(R.id.But_Group);
+        MACD_But = (RadioButton) findViewById(R.id.MACD_But);
+        RSI_But = (RadioButton) findViewById(R.id.RSI_But);
+        KDJ_But = (RadioButton) findViewById(R.id.KDJ_But);
+        BOLL_But = (RadioButton) findViewById(R.id.BOLL_But);
+
         MACD_But.setOnClickListener(this);
         RSI_But.setOnClickListener(this);
         KDJ_But.setOnClickListener(this);
         BOLL_But.setOnClickListener(this);
 
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewUtils.dpTopx(context, 150),
-                stockIndexTabHeight);
-        lp.gravity = Gravity.BOTTOM;
-        lp.setMargins(ViewUtils.dpTopx(context, 10), 0, 0, stockIndexViewHeight - ViewUtils.dpTopx(context, 5));
-        addView(stockIndexView, lp);
-
         showMACD();
-
-        kLineView.isRefreshing();
     }
 
     public InteractiveKLineView getKLineView() {

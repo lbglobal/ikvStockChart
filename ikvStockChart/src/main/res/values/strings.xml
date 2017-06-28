@@ -15,4 +15,6 @@
     <string name="boll_normal">BOLL(20, 2)</string>
     <string name="boll_highlight">BOLL(20, 2) ●MID %1$.2f ●UPPER %2$.2f ●LOWER %3$.2f</string>
 
+    <string name="volume_highlight">●MA5 %1$.2f ●MA10 %2$.2f</string>
+
 </resources>

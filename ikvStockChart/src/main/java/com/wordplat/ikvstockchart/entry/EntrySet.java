@@ -255,6 +255,8 @@ public class EntrySet {
         float ma5 = 0;
         float ma10 = 0;
         float ma20 = 0;
+        float volumeMa5 = 0;
+        float volumeMa10 = 0;
 
         for (int i = 0; i < entries.size(); i++) {
             Entry entry = entries.get(i);
@@ -263,18 +265,31 @@ public class EntrySet {
             ma10 += entry.getClose();
             ma20 += entry.getClose();
 
+            volumeMa5 += entry.getVolume();
+            volumeMa10 += entry.getVolume();
+
             if (i >= 5) {
                 ma5 -= entries.get(i - 5).getClose();
                 entry.setMa5(ma5 / 5f);
+
+                volumeMa5 -= entries.get(i - 5).getVolume();
+                entry.setVolumeMa5(volumeMa5 / 5f);
             } else {
                 entry.setMa5(ma5 / (i + 1f));
+
+                entry.setVolumeMa5(volumeMa5 / (i + 1f));
             }
 
             if (i >= 10) {
                 ma10 -= entries.get(i - 10).getClose();
                 entry.setMa10(ma10 / 10f);
+
+                volumeMa10 -= entries.get(i - 10).getVolume();
+                entry.setVolumeMa10(volumeMa10 / 5f);
             } else {
                 entry.setMa10(ma10 / (i + 1f));
+
+                entry.setVolumeMa10(volumeMa10 / (i + 1f));
             }
 
             if (i >= 20) {

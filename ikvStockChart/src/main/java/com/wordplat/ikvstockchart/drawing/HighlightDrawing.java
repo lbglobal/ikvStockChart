@@ -39,10 +39,10 @@ import java.util.List;
 
 public class HighlightDrawing implements IDrawing {
 
-    private Paint highlightPaint; // 高亮线条画笔
+    protected Paint highlightPaint; // 高亮线条画笔
 
-    private final RectF contentRect = new RectF(); // 绘图区域
-    private AbstractRender render;
+    protected final RectF contentRect = new RectF(); // 绘图区域
+    protected AbstractRender render;
 
     private List<IMarkerView> markerViewList = new ArrayList<>();
 

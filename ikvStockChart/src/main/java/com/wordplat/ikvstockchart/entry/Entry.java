@@ -33,12 +33,16 @@ public class Entry {
     private final float low; // 最低价
     private final float close; // 收盘价
     private final int volume; // 量
-    private final String xLabel; // X 轴标签
+    private String xLabel; // X 轴标签
 
     // MA 指标的三个属性
     private float ma5;
     private float ma10;
     private float ma20;
+
+    // 量的5日平均和10日平均
+    private double volumeMa5;
+    private double volumeMa10;
 
     // MACD 指标的三个属性
     private float dea;
@@ -119,6 +123,10 @@ public class Entry {
         return xLabel;
     }
 
+    public void setXLabel(String xLabel) {
+        this.xLabel = xLabel;
+    }
+
     public float getMa5() {
         return ma5;
     }
@@ -141,6 +149,22 @@ public class Entry {
 
     public void setMa20(float ma20) {
         this.ma20 = ma20;
+    }
+
+    public double getVolumeMa5() {
+        return volumeMa5;
+    }
+
+    public void setVolumeMa5(double volumeMa5) {
+        this.volumeMa5 = volumeMa5;
+    }
+
+    public double getVolumeMa10() {
+        return volumeMa10;
+    }
+
+    public void setVolumeMa10(double volumeMa10) {
+        this.volumeMa10 = volumeMa10;
     }
 
     public float getDea() {

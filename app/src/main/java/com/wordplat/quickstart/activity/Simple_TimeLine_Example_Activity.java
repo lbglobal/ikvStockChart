@@ -78,6 +78,9 @@ public class Simple_TimeLine_Example_Activity extends BaseActivity {
                 Entry entry = new Entry(btcBean.getPrice(), (int) btcBean.getAmount(), "");
                 entrySet.addEntry(entry);
             }
+            entrySet.getEntryList().get(0).setXLabel("09:30");
+            entrySet.getEntryList().get(2).setXLabel("11:30/13:00");
+            entrySet.getEntryList().get(4).setXLabel("15:00");
 
             timeLineView.notifyDataSetChanged();
         }

@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>KLineRender</p>
+ * <p>KLineRender K线图</p>
  * <p>Date: 2017/3/3</p>
  *
  * @author afon

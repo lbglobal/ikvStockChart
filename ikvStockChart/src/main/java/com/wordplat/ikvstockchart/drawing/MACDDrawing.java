@@ -144,7 +144,6 @@ public class MACDDrawing implements IDrawing {
         render.mapPoints(xPointBuffer);
         render.mapPoints(null, deaBuffer);
         render.mapPoints(null, diffBuffer);
-        render.mapPoints(null, macdBuffer);
 
         for (int i = minIndex; i < maxIndex; i++) {
             Entry entry = entrySet.getEntryList().get(i);

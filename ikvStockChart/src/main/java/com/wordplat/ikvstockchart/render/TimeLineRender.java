@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>TimeLineRender</p>
+ * <p>TimeLineRender 分时图</p>
  * <p>Date: 2017/3/9</p>
  *
  * @author afon

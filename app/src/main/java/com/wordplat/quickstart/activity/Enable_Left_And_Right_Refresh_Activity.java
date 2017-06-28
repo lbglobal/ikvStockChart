@@ -44,6 +44,7 @@ public class Enable_Left_And_Right_Refresh_Activity extends BaseActivity {
     @ViewInject(R.id.kLineLayout) InteractiveKLineLayout kLineLayout = null;
     @ViewInject(R.id.MA_Text) private TextView MA_Text = null;
     @ViewInject(R.id.StockIndex_Text) private TextView StockIndex_Text = null;
+    @ViewInject(R.id.Volume_Text) private TextView Volume_Text = null;
     @ViewInject(R.id.Left_Loading_Image) private ImageView Left_Loading_Image = null;
     @ViewInject(R.id.Right_Loading_Image) private ImageView Right_Loading_Image = null;
 
@@ -75,6 +76,15 @@ public class Enable_Left_And_Right_Refresh_Activity extends BaseActivity {
                         sizeColor.getMa5Color(),
                         sizeColor.getMa10Color(),
                         sizeColor.getMa20Color()));
+
+                String volumeString = String.format(getResources().getString(R.string.volume_highlight),
+                        entry.getVolumeMa5(),
+                        entry.getVolumeMa10());
+
+                Volume_Text.setText(getSpannableString(volumeString,
+                        sizeColor.getMa5Color(),
+                        sizeColor.getMa10Color(),
+                        0));
 
                 SpannableString spanString = new SpannableString("");
                 if (kLineLayout.isShownMACD()) {
@@ -128,6 +138,7 @@ public class Enable_Left_And_Right_Refresh_Activity extends BaseActivity {
             public void onCancelHighlight() {
                 String maString = getResources().getString(R.string.ma_normal);
                 MA_Text.setText(maString);
+                Volume_Text.setText("");
 
                 String stockIndexString = "";
                 if (kLineLayout.isShownMACD()) {
@@ -216,17 +227,23 @@ public class Enable_Left_And_Right_Refresh_Activity extends BaseActivity {
 
         int pos0 = splitString[0].length();
         int pos1 = pos0 + splitString[1].length() + 1;
-        int pos2 = pos1 + splitString[2].length() + 1;
         int end = str.length();
 
         spanString.setSpan(new ForegroundColorSpan(partColor0),
                 pos0, pos1, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
 
-        spanString.setSpan(new ForegroundColorSpan(partColor1),
-                pos1, pos2, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+        if (splitString.length > 2) {
+            int pos2 = pos1 + splitString[2].length() + 1;
 
-        spanString.setSpan(new ForegroundColorSpan(partColor2),
-                pos2, end, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+            spanString.setSpan(new ForegroundColorSpan(partColor1),
+                    pos1, pos2, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+
+            spanString.setSpan(new ForegroundColorSpan(partColor2),
+                    pos2, end, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+        } else {
+            spanString.setSpan(new ForegroundColorSpan(partColor1),
+                    pos1, end, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+        }
 
         return spanString;
     }

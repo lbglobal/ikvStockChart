@@ -1,6 +1,6 @@
 ## Features
 
-当前最新版本：0.1.4
+当前最新版本：0.1.5
 
 支持在 XML 布局文件和代码中设置各个线条颜色、大小配置
 
@@ -18,13 +18,11 @@
 
 ## Change log
 
-> 2017.05.22
+> 2017.06.28
 
-增加 蜡烛图实心空心设置
+增加 K线图成交量柱状图
 
-fixed #10
-
-![](http://ww1.sinaimg.cn/large/006tNc79gy1ffu3gin235j30f00qoaar.jpg)
+![S70413-225235](Screenshots/S70628-230542.jpg)
 
 查看全部日志：[https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md](https://github.com/wordplat/ikvStockChart/blob/master/CHANGE_LOG.md)
 
@@ -36,7 +34,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.wordplat:ikvStockChart:0.1.4'
+    compile 'com.wordplat:ikvStockChart:0.1.5'
 }
 ```
 

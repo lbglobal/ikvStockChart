@@ -5,10 +5,14 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wordplat.quickstart.BuildConfig;
+import com.wordplat.quickstart.app.AppRuntime;
+import com.wordplat.quickstart.utils.SSLHelper;
 
 import org.xutils.http.RequestParams;
 
 import java.io.File;
+
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  * <p>ServerRequestParams</p>
@@ -34,7 +38,12 @@ public class ServerRequestParams extends RequestParams {
         requestJson = new JSONObject();
 
         setMaxRetryCount(2);
-        setConnectTimeout(10000);
+        setConnectTimeout(20000);
+
+        SSLSocketFactory sslSocketFactory = SSLHelper.getSSLSocketFactory(AppRuntime.sContext);
+        if (sslSocketFactory != null) {
+            setSslSocketFactory(sslSocketFactory);
+        }
     }
 
     public void addRequestParams(String key, Object value) {

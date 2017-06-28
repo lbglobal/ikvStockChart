@@ -119,7 +119,8 @@ public enum AppRuntimeInitializer {
 
     /** Android 6.0 以上系统请求 IMEI 和设备 ID */
     private void requestIMEIforMIfNeeded(Activity activity) {
-        if (TextUtils.isEmpty(DeviceRuntime.IMEI) || TextUtils.isEmpty(DeviceRuntime.DEVICE_ID)) {
+        if (ContextCompat.checkSelfPermission(AppRuntime.sContext,
+                android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, new String[]{android.Manifest.permission.READ_PHONE_STATE}, REQUEST_IMEI_PERMISSION);
         }
     }

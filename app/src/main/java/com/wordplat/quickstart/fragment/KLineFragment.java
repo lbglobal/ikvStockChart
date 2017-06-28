@@ -41,13 +41,14 @@ public class KLineFragment extends BaseFragment {
     @ViewInject(R.id.kLineLayout) private InteractiveKLineLayout kLineLayout = null;
     @ViewInject(R.id.MA_Text) private TextView MA_Text = null;
     @ViewInject(R.id.StockIndex_Text) private TextView StockIndex_Text = null;
+    @ViewInject(R.id.Volume_Text) private TextView Volume_Text = null;
     @ViewInject(R.id.Left_Loading_Image) private ImageView Left_Loading_Image = null;
     @ViewInject(R.id.Right_Loading_Image) private ImageView Right_Loading_Image = null;
 
     private static final String STOCK_CODE = "600030"; // 中信证券
-    private static final int REQUEST_XOM_FIRST = 1;
-    private static final int REQUEST_XOM_PREV = 2;
-    private static final int REQUEST_XOM_NEXT = 3;
+    private static final int REQUEST_STOCK_FIRST = 1;
+    private static final int REQUEST_STOCK_PREV = 2;
+    private static final int REQUEST_STOCK_NEXT = 3;
 
     private StockPresenter.KLineType kLineType;
 
@@ -67,7 +68,7 @@ public class KLineFragment extends BaseFragment {
         super.onResume();
 
         presenter.attachView(viewListener);
-        presenter.loadFirst(REQUEST_XOM_FIRST, STOCK_CODE, kLineType);
+        presenter.loadFirst(REQUEST_STOCK_FIRST, STOCK_CODE, kLineType);
     }
 
     @Override
@@ -94,6 +95,15 @@ public class KLineFragment extends BaseFragment {
                         sizeColor.getMa5Color(),
                         sizeColor.getMa10Color(),
                         sizeColor.getMa20Color()));
+
+                String volumeString = String.format(getResources().getString(R.string.volume_highlight),
+                        entry.getVolumeMa5(),
+                        entry.getVolumeMa10());
+
+                Volume_Text.setText(getSpannableString(volumeString,
+                        sizeColor.getMa5Color(),
+                        sizeColor.getMa10Color(),
+                        0));
 
                 SpannableString spanString = new SpannableString("");
                 if (kLineLayout.isShownMACD()) {
@@ -147,6 +157,7 @@ public class KLineFragment extends BaseFragment {
             public void onCancelHighlight() {
                 String maString = getResources().getString(R.string.ma_normal);
                 MA_Text.setText(maString);
+                Volume_Text.setText("");
 
                 String stockIndexString = "";
                 if (kLineLayout.isShownMACD()) {
@@ -181,12 +192,12 @@ public class KLineFragment extends BaseFragment {
 
             @Override
             public void onLeftRefresh() {
-                presenter.loadPrev(REQUEST_XOM_PREV, STOCK_CODE, kLineType);
+                presenter.loadPrev(REQUEST_STOCK_PREV, STOCK_CODE, kLineType);
             }
 
             @Override
             public void onRightRefresh() {
-                presenter.loadNext(REQUEST_XOM_NEXT, STOCK_CODE, kLineType);
+                presenter.loadNext(REQUEST_STOCK_NEXT, STOCK_CODE, kLineType);
             }
         });
     }
@@ -197,17 +208,23 @@ public class KLineFragment extends BaseFragment {
 
         int pos0 = splitString[0].length();
         int pos1 = pos0 + splitString[1].length() + 1;
-        int pos2 = pos1 + splitString[2].length() + 1;
         int end = str.length();
 
         spanString.setSpan(new ForegroundColorSpan(partColor0),
                 pos0, pos1, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
 
-        spanString.setSpan(new ForegroundColorSpan(partColor1),
-                pos1, pos2, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+        if (splitString.length > 2) {
+            int pos2 = pos1 + splitString[2].length() + 1;
 
-        spanString.setSpan(new ForegroundColorSpan(partColor2),
-                pos2, end, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+            spanString.setSpan(new ForegroundColorSpan(partColor1),
+                    pos1, pos2, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+
+            spanString.setSpan(new ForegroundColorSpan(partColor2),
+                    pos2, end, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+        } else {
+            spanString.setSpan(new ForegroundColorSpan(partColor1),
+                    pos1, end, SpannableString.SPAN_EXCLUSIVE_INCLUSIVE);
+        }
 
         return spanString;
     }
@@ -216,12 +233,12 @@ public class KLineFragment extends BaseFragment {
         @Override
         public void onStartRequest(int requestCode) {
             switch (requestCode) {
-                case REQUEST_XOM_PREV:
+                case REQUEST_STOCK_PREV:
                     Left_Loading_Image.setVisibility(View.VISIBLE);
                     ((Animatable) Left_Loading_Image.getDrawable()).start();
                     break;
 
-                case REQUEST_XOM_NEXT:
+                case REQUEST_STOCK_NEXT:
                     Right_Loading_Image.setVisibility(View.VISIBLE);
                     ((Animatable) Right_Loading_Image.getDrawable()).start();
                     break;
@@ -231,12 +248,12 @@ public class KLineFragment extends BaseFragment {
         @Override
         public void onFinishRequest(int requestCode) {
             switch (requestCode) {
-                case REQUEST_XOM_PREV:
+                case REQUEST_STOCK_PREV:
                     Left_Loading_Image.setVisibility(View.GONE);
                     ((Animatable) Left_Loading_Image.getDrawable()).stop();
                     break;
 
-                case REQUEST_XOM_NEXT:
+                case REQUEST_STOCK_NEXT:
                     Right_Loading_Image.setVisibility(View.GONE);
                     ((Animatable) Right_Loading_Image.getDrawable()).start();
                     break;
@@ -248,7 +265,7 @@ public class KLineFragment extends BaseFragment {
             List<KLineBean> response = presenter.getkLineList();
 
             switch (requestCode) {
-                case REQUEST_XOM_FIRST:
+                case REQUEST_STOCK_FIRST:
                     for (KLineBean kLineBean : response) {
                         entrySet.addEntry(new Entry(kLineBean.getOpen(),
                                 kLineBean.getHigh(),
@@ -262,7 +279,7 @@ public class KLineFragment extends BaseFragment {
                     kLineLayout.getKLineView().notifyDataSetChanged();
                     break;
 
-                case REQUEST_XOM_PREV:
+                case REQUEST_STOCK_PREV:
                     for (int i = response.size() - 1 ; i >= 0 ; i--) {
                         KLineBean kLineBean = response.get(i);
                         entrySet.insertFirst(new Entry(kLineBean.getOpen(),
@@ -277,7 +294,7 @@ public class KLineFragment extends BaseFragment {
                     kLineLayout.getKLineView().refreshComplete(response.size() > 0);
                     break;
 
-                case REQUEST_XOM_NEXT:
+                case REQUEST_STOCK_NEXT:
                     for (KLineBean kLineBean : response) {
                         entrySet.addEntry(new Entry(kLineBean.getOpen(),
                                 kLineBean.getHigh(),
@@ -296,17 +313,17 @@ public class KLineFragment extends BaseFragment {
         @Override
         public void onResultEmpty(int requestCode) {
             switch (requestCode) {
-                case REQUEST_XOM_FIRST:
+                case REQUEST_STOCK_FIRST:
                     entrySet.setLoadingStatus(false);
                     kLineLayout.getKLineView().notifyDataSetChanged();
                     break;
 
-                case REQUEST_XOM_PREV:
+                case REQUEST_STOCK_PREV:
                     kLineLayout.getKLineView().refreshComplete(false);
                     Toast.makeText(mActivity, "已经到达最左边了", Toast.LENGTH_SHORT).show();
                     break;
 
-                case REQUEST_XOM_NEXT:
+                case REQUEST_STOCK_NEXT:
                     kLineLayout.getKLineView().refreshComplete(false);
                     Toast.makeText(mActivity, "已经到达最右边了", Toast.LENGTH_SHORT).show();
                     break;
@@ -318,7 +335,7 @@ public class KLineFragment extends BaseFragment {
             super.onNetworkTimeOutError(requestCode);
 
             switch (requestCode) {
-                case REQUEST_XOM_FIRST:
+                case REQUEST_STOCK_FIRST:
                     entrySet.setLoadingStatus(false);
                     kLineLayout.getKLineView().notifyDataSetChanged();
                     break;
@@ -330,7 +347,7 @@ public class KLineFragment extends BaseFragment {
             super.onNoNetworkError(requestCode);
 
             switch (requestCode) {
-                case REQUEST_XOM_FIRST:
+                case REQUEST_STOCK_FIRST:
                     entrySet.setLoadingStatus(false);
                     kLineLayout.getKLineView().notifyDataSetChanged();
                     break;

@@ -23,6 +23,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
 
+import com.wordplat.ikvstockchart.compat.ViewUtils;
 import com.wordplat.ikvstockchart.entry.Entry;
 import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.entry.SizeColor;
@@ -94,46 +95,7 @@ public class CandleDrawing implements IDrawing {
 //        }
 
         for (int i = minIndex; i < maxIndex; i++) {
-            Entry entry = entrySet.getEntryList().get(i);
-
-            // 设置 涨、跌的颜色
-            if (entry.getClose() > entry.getOpen()) { // 今日收盘价大于今日开盘价为涨
-                candlePaint.setColor(sizeColor.getIncreasingColor());
-            } else if (entry.getClose() == entry.getOpen()) { // 今日收盘价等于今日开盘价有涨停、跌停、不涨不跌三种情况
-                if (i > 0) {
-                    if (entry.getOpen() > entrySet.getEntryList().get(i - 1).getClose()) { // 今日开盘价大于昨日收盘价为涨停
-                        candlePaint.setColor(sizeColor.getIncreasingColor());
-                    } else if (entry.getOpen() == entrySet.getEntryList().get(i - 1).getClose()) { // 不涨不跌
-                        candlePaint.setColor(sizeColor.getNeutralColor());
-                    } else { // 否则为跌停
-                        candlePaint.setColor(sizeColor.getDecreasingColor());
-                    }
-                } else {
-                    if (entry.getOpen() > entrySet.getPreClose()) {
-                        candlePaint.setColor(sizeColor.getIncreasingColor());
-                    } else if (entry.getOpen() == entrySet.getPreClose()) {
-                        candlePaint.setColor(sizeColor.getNeutralColor());
-                    } else {
-                        candlePaint.setColor(sizeColor.getDecreasingColor());
-                    }
-                }
-            } else { // 今日收盘价小于今日开盘价为跌
-                candlePaint.setColor(sizeColor.getDecreasingColor());
-            }
-
-            if (candlePaint.getColor() == sizeColor.getIncreasingColor()) {
-                if (sizeColor.getIncreasingStyle() == Paint.Style.STROKE) {
-                    candlePaint.setStyle(Paint.Style.STROKE);
-                } else {
-                    candlePaint.setStyle(Paint.Style.FILL);
-                }
-            } else {
-                if (sizeColor.getDecreasingStyle() == Paint.Style.STROKE) {
-                    candlePaint.setStyle(Paint.Style.STROKE);
-                } else {
-                    candlePaint.setStyle(Paint.Style.FILL);
-                }
-            }
+            Entry entry = ViewUtils.setUpCandlePaint(candlePaint, entrySet, i, sizeColor);
 
             // 绘制 影线
             candleLineBuffer[0] = i + 0.5f;

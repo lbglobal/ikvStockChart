@@ -28,6 +28,8 @@ import com.wordplat.ikvstockchart.R;
 import com.wordplat.ikvstockchart.align.XMarkerAlign;
 import com.wordplat.ikvstockchart.align.YLabelAlign;
 import com.wordplat.ikvstockchart.align.YMarkerAlign;
+import com.wordplat.ikvstockchart.entry.Entry;
+import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.entry.SizeColor;
 
 /**
@@ -53,6 +55,54 @@ public class ViewUtils {
     public static int pxTodp(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * 设置 蜡烛图画笔的颜色和是否空心
+     */
+    public static Entry setUpCandlePaint(Paint candlePaint, EntrySet entrySet, int currentEntryIndex, SizeColor sizeColor) {
+        Entry entry = entrySet.getEntryList().get(currentEntryIndex);
+
+        // 设置 涨、跌的颜色
+        if (entry.getClose() > entry.getOpen()) { // 今日收盘价大于今日开盘价为涨
+            candlePaint.setColor(sizeColor.getIncreasingColor());
+        } else if (entry.getClose() == entry.getOpen()) { // 今日收盘价等于今日开盘价有涨停、跌停、不涨不跌三种情况
+            if (currentEntryIndex > 0) {
+                if (entry.getOpen() > entrySet.getEntryList().get(currentEntryIndex - 1).getClose()) { // 今日开盘价大于昨日收盘价为涨停
+                    candlePaint.setColor(sizeColor.getIncreasingColor());
+                } else if (entry.getOpen() == entrySet.getEntryList().get(currentEntryIndex - 1).getClose()) { // 不涨不跌
+                    candlePaint.setColor(sizeColor.getNeutralColor());
+                } else { // 否则为跌停
+                    candlePaint.setColor(sizeColor.getDecreasingColor());
+                }
+            } else {
+                if (entry.getOpen() > entrySet.getPreClose()) {
+                    candlePaint.setColor(sizeColor.getIncreasingColor());
+                } else if (entry.getOpen() == entrySet.getPreClose()) {
+                    candlePaint.setColor(sizeColor.getNeutralColor());
+                } else {
+                    candlePaint.setColor(sizeColor.getDecreasingColor());
+                }
+            }
+        } else { // 今日收盘价小于今日开盘价为跌
+            candlePaint.setColor(sizeColor.getDecreasingColor());
+        }
+
+        if (candlePaint.getColor() == sizeColor.getIncreasingColor()) {
+            if (sizeColor.getIncreasingStyle() == Paint.Style.STROKE) {
+                candlePaint.setStyle(Paint.Style.STROKE);
+            } else {
+                candlePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            }
+        } else {
+            if (sizeColor.getDecreasingStyle() == Paint.Style.STROKE) {
+                candlePaint.setStyle(Paint.Style.STROKE);
+            } else {
+                candlePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            }
+        }
+
+        return entry;
     }
 
     /**
