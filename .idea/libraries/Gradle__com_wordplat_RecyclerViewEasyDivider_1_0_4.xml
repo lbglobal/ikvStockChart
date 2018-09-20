@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.wordplat:RecyclerViewEasyDivider-1.0.4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.wordplat/RecyclerViewEasyDivider/1.0.4/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.wordplat/RecyclerViewEasyDivider/1.0.4/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/wrapper/dists/gradle-2.2.1-all/caches/modules-2/files-2.1/com.wordplat/RecyclerViewEasyDivider/1.0.4/fa7ea865cff7bbbf487868167ec9af1555ce49f8/RecyclerViewEasyDivider-1.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -32,7 +32,7 @@ public class Entry {
     private final float high; // 最高价
     private final float low; // 最低价
     private final float close; // 收盘价
-    private final int volume; // 量
+    private final float volume; // 量
     private String xLabel; // X 轴标签
 
     // MA 指标的三个属性
@@ -71,7 +71,7 @@ public class Entry {
      * @param volume 量
      * @param xLabel X 轴标签
      */
-    public Entry(float close, int volume, String xLabel) {
+    public Entry(float close, float volume, String xLabel) {
         this.open = 0;
         this.high = 0;
         this.low = 0;
@@ -90,7 +90,7 @@ public class Entry {
      * @param volume 量
      * @param xLabel X 轴标签
      */
-    public Entry(float open, float high, float low, float close, int volume, String xLabel) {
+    public Entry(float open, float high, float low, float close, float volume, String xLabel) {
         this.open = open;
         this.high = high;
         this.low = low;
@@ -115,7 +115,7 @@ public class Entry {
         return close;
     }
 
-    public int getVolume() {
+    public float getVolume() {
         return volume;
     }
 
