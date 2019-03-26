@@ -21,6 +21,8 @@ package com.wordplat.ikvstockchart.drawing;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Region;
+import android.os.Build;
 
 import com.wordplat.ikvstockchart.align.YLabelAlign;
 import com.wordplat.ikvstockchart.entry.EntrySet;
@@ -117,7 +119,11 @@ public class KLineGridAxisDrawing implements IDrawing {
         }
 
         canvas.save();
-        canvas.clipRect(kLineRect.left, kLineRect.top, kLineRect.right, kLineRect.bottom + sizeColor.getXLabelViewHeight());
+        if(Build.VERSION.SDK_INT >= 28) {
+            canvas.clipRect(kLineRect.left, kLineRect.top, kLineRect.right, kLineRect.bottom + sizeColor.getXLabelViewHeight(), Region.Op.UNION);
+        }else{
+            canvas.clipRect(kLineRect.left, kLineRect.top, kLineRect.right, kLineRect.bottom + sizeColor.getXLabelViewHeight());
+        }
 
         // 每隔特定个 entry，绘制一条竖向网格线和 X 轴 label
         final int count = render.getZoomTimes() < 0 ? Math.abs(7 * render.getZoomTimes()) + 2 : 7;
