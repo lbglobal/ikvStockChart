@@ -21,6 +21,8 @@ package com.wordplat.ikvstockchart.drawing;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Region;
+import android.os.Build;
 
 import com.wordplat.ikvstockchart.entry.Entry;
 import com.wordplat.ikvstockchart.entry.EntrySet;
@@ -129,7 +131,11 @@ public class RSIDrawing implements IDrawing {
     @Override
     public void onComputeOver(Canvas canvas, int minIndex, int maxIndex, float minY, float maxY) {
         canvas.save();
-        canvas.clipRect(indexRect);
+        if(Build.VERSION.SDK_INT >= 28) {
+            canvas.clipRect(indexRect, Region.Op.UNION);
+        }else{
+            canvas.clipRect(indexRect);
+        }
 
         canvas.drawRect(indexRect, axisPaint);
 
