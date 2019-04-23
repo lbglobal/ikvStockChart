@@ -8,6 +8,14 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- ################################# 其它设定 ######################################### -->
+
+    <!-- 与服务器接口通信的版本号，勿在这里手工修改此值，在编译时本值会自动由gradle设置上 -->
+    <meta-data
+        android:name="server_http_url_version"
+        android:value="${SERVER_HTTP_URL_VERSION}" />
+
+
     <application
         android:name=".app.App"
         android:icon="@mipmap/ic_launcher"
@@ -60,13 +68,5 @@
             android:name=".activity.Simple_TimeLine_Example_Activity"
             android:screenOrientation="portrait" />
 
-        <!-- ################################# 其它设定 ######################################### -->
-
-        <!-- 与服务器接口通信的版本号，勿在这里手工修改此值，在编译时本值会自动由gradle设置上 -->
-        <meta-entryData
-            android:name="server_http_url_version"
-            android:value="${SERVER_HTTP_URL_VERSION}" />
-
     </application>
-
 </manifest>
