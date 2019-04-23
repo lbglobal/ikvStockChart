@@ -24,10 +24,12 @@ android {
     applicationVariants.all { variant ->
         if (variant.buildType.name.contains('release')) {
             variant.outputs.each { output ->
+                def relativeRootDir = output.packageApplication.outputDirectory.toPath()
+                        .relativize(rootDir.toPath()).toFile()
                 def outputFile = output.outputFile
                 if (outputFile != null && outputFile.name.endsWith('.apk')) {
                     def fileName = "ikvStockChart-" + defaultConfig.versionName + "-release.apk"
-                    output.outputFile = new File(outputFile.parent, fileName)
+                    output.outputFileName = new File("$relativeRootDir/release", fileName)
                 }
             }
         }
@@ -67,7 +69,7 @@ dependencies {
     // 设置状态栏颜色
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     // multidex
-    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:multidex:1.0.3'
     // 下拉刷新, 支持ScrollView、RecyclerView
     compile 'com.chanven.lib:cptr:1.1.0'
 
